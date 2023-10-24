@@ -6,6 +6,7 @@ const userController= require('../app/Controller/UserController')
 
 router.post('/login',userController.loginSubmit)
 router.post('/register',userController.register)
+router.post('refresh',userController.requestRefreshToken)
 router.get('/',userController.loginForm)
 
 module.exports = router;

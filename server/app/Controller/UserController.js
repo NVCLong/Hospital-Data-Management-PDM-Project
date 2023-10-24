@@ -1,8 +1,11 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+
 class UserController {
+
     //[GET] /authenication/
-    refreshTokenList=[];
+    static refreshTokenList=[];
+    static user ={username: 'longcao', password:'$2b$10$gWVYwRuwHvuP1JU.8EeUCOG6ITxnmp7XRQCyQB0B/6Largtl0glGO'}
     async loginForm(req,res){c
         try{
             res.json({success:true,
@@ -17,12 +20,12 @@ class UserController {
     async loginSubmit(req, res) {
         const {username, password} = req.body;
         try{
-            const user= await User.find({username:username});
+            // const user= await User.find({username:username});
+            //mock test
+            let user= UserController.user
             if(!user){
                 res.status(404).json("error")
             }
-
-
             // Verify Password
             const validPassword = await bcrypt.compare(
                 password,
@@ -31,12 +34,30 @@ class UserController {
             if(!validPassword){
                 res.status(200).json("Different password")
             }else if(validPassword && user){
-                const accessToken=this.generateAccessToken(user)  // store in redux
-                const refreshToken =this.generateRefreshToken(user) // store in httpOnly Cookies
+                const accessToken=jwt.sign(
+                    {
+                        username: user.username,
+                        password: user.password
+
+                    },
+                    'secret',
+                    {expiresIn: 60 * 60},
+                )  // store in redux
+                const refreshToken =jwt.sign(
+                    {
+                        username: user.username,
+                        password: user.password
+
+                    },
+                    'secret',
+                    {expiresIn: 60 * 60},
+                ) // store in httpOnly Cookies
+                UserController.refreshTokenList.push(refreshToken)
                 res.cookie('refreshToken', refreshToken,{
                     httpOnly: true,
                     secure:true
                 })
+                res.status(200).json({username: username, accessToken: accessToken})
             }
         }catch (e) {
             console.log(e)
@@ -61,8 +82,9 @@ class UserController {
     generateAccessToken(user){
         return jwt.sign(
             {
-                id: user.id,
-                admin: user.admin
+                    username: user.username,
+                    password: user.password
+
             },
             'secret',
             {expiresIn: 60 * 60},
@@ -71,25 +93,28 @@ class UserController {
     generateRefreshToken(user) {
         return jwt.sign(
             {
-                id: user.id,
-                admin: user.admin
-            }
+                username: user.username,
+                password: user.password
+            },
+            'secret',
+            {expiresIn: '1d'}
         );
     }
 
     // Redis
     async requestRefreshToken(req, res) {
         const user = await User.find({username: req.cookies.username})
+
         try {
             const refreshToken = await req.cookies.refreshToken;
             if (!refreshToken) console.log("Refresh token is invalid");
-            if (this.refreshTokenList.includes(refreshToken)===false) console.log("Refresh token is invalid")
+            if (UserController.refreshTokenList.includes(refreshToken)===false) console.log("Refresh token is invalid")
             jwt.verify( refreshToken,'secret',(err, user)=>{
-                let refreshTokens= this.refreshTokenList.filter((Token)=>{ if (token!== refreshToken) return token})
+                let refreshTokens= UserController.refreshTokenList.filter((Token)=>{ if (token!== refreshToken) return token})
                 if(err) console.log(err);
                 const accessToken= this.generateAccessToken(user)
                 const newRefreshToken= this.generateRefreshToken(user)
-                this.refreshTokenList.push(newRefreshToken)
+                UserController.refreshTokenList.push(newRefreshToken)
                 res.cookie('refreshToken', newRefreshToken,{
                     httpOnly: true,
                     secure:true,
@@ -103,5 +128,6 @@ class UserController {
             console.log(e)
         }
     }
+
 }
 module.exports = new UserController;
