@@ -83,7 +83,7 @@ CREATE TABLE Billing (
     FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
-/*****Table Patients: 227 data *****/
+/*****Table Patients: 229 data *****/
 INSERT INTO Patients (PatientID, FirstName, LastName, DateOfBirth, Gender, Address, Phone, Email) VALUES
 ('P0001', 'Nguyen', 'Van An', '1965-08-12', 'Male', 'Hanoi', '0912345678', 'nguyenvanan@gmail.com'),
 ('P0002', 'Tran', 'Thi Binh', '1978-03-25', 'Female', 'Ho Chi Minh City', '0923456789', 'tranthibinh@gmail.com'),
