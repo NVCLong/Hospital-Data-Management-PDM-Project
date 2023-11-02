@@ -1,7 +1,7 @@
 CREATE TABLE User (
     UserID varchar(10) PRIMARY KEY,
     IsStaff varchar(10),
-    Username varchar(10),
+    Username varchar(10) UNIQUE,
     Password varchar(10),
     Role varchar(20),
     Action varchar(20),
@@ -14,8 +14,8 @@ CREATE TABLE MedicalStaff (
     DateOfBirth Date,
     Gender Char(10),
     Address varchar(40),
-    Phone varchar(10),
-    Email varchar(20),
+    Phone varchar(10) UNIQUE,
+    Email varchar(20) UNIQUE,
     Specialty varchar(20)
 );
 CREATE TABLE Scheduling (
@@ -32,8 +32,8 @@ CREATE TABLE Patients (
     DateOfBirth Date,
     Gender char(10),
     Address varchar(40),
-    Phone varchar(10),
-    Email varchar(20)
+    Phone varchar(10) UNIQUE,
+    Email varchar(20) UNIQUE
 );
 CREATE TABLE Departments (
     DepartmentID varchar(10) PRIMARY KEY,
