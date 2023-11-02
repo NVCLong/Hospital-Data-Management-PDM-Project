@@ -41,7 +41,7 @@ class UserController {
 
                     },
                     'secret',
-                    {expiresIn: 60 * 60},
+                    {expiresIn: "20s"},
                 )  // store in redux
                 const refreshToken =jwt.sign(
                     {

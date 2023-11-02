@@ -8,6 +8,9 @@ class SiteController{
         msg: 'This is home page'}
         )
     }
+    showUser(req,res){
+        res.status(200).json({success: true});
+    }
 }
 
 module.exports= new SiteController();
