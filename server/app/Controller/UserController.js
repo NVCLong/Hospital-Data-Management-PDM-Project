@@ -11,6 +11,7 @@ const db=connect = mysql.createConnection({
 })
 
 class UserController {
+    static id=0;
 
     //[GET] /authenication/
     static refreshTokenList=[];
@@ -26,6 +27,7 @@ class UserController {
     }
     //[POST]  /authentication/login
     async loginSubmit(req, res) {
+
         let username= req.body.username;
         let password= req.body.password;
         try{
@@ -87,7 +89,7 @@ class UserController {
             const salt= bcrypt.genSaltSync(10)
             const hashPassword= bcrypt.hashSync(req.body.password, salt)
             const user={
-                id: 1,
+                id: UserController.id,
                 name: req.body.username,
                 email: req.body.email,
                 password: hashPassword,
@@ -96,6 +98,7 @@ class UserController {
                if (error) throw error;
                // Neat!
            });
+            UserController.id++;
             res.json({msg: "success"})
             console.log(querry.sql);
         }catch (e){
