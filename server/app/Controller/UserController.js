@@ -1,11 +1,19 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+const mysql = require("mysql");
+const {RANDOM} = require("mysql/lib/PoolSelector");
+const db=connect = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    port: 3306,
+    database: 'test'
+})
 
 class UserController {
 
     //[GET] /authenication/
     static refreshTokenList=[];
-    static user ={username: 'longcao', password:'$2b$10$gWVYwRuwHvuP1JU.8EeUCOG6ITxnmp7XRQCyQB0B/6Largtl0glGO'}
     async loginForm(req,res){c
         try{
             res.json({success:true,
@@ -18,47 +26,53 @@ class UserController {
     }
     //[POST]  /authentication/login
     async loginSubmit(req, res) {
-        const {username, password} = req.body;
+        let username= req.body.username;
+        let password= req.body.password;
         try{
-            // const user= await User.find({username:username});
-            //mock test
-            let user= UserController.user
-            if(!user){
-                res.status(404).json("error")
-            }
+            let user;
+            db.query(`select * from user where name = '${username}'`, async (err, result) => {
+                user = result[0];
+                if(!user){
+                    res.status(404).json("error")
+                }
+                const validPassword = await bcrypt.compare(
+                    password,
+                    user.password
+                );
+                if (!validPassword) {
+                    res.status(200).json("Different password")
+                } else if (validPassword && user) {
+                    const accessToken = jwt.sign(
+                        {
+                            username: user.name,
+                            password: user.password
+
+                        },
+                        'secret',
+                        {expiresIn: "20s"},
+                    )  // store in redux
+                    const refreshToken = jwt.sign(
+                        {
+                            username: user.name,
+                            password: user.password
+
+                        },
+                        'secret',
+                        {expiresIn: 60 * 60},
+                    )
+                    // store in httpOnly Cookies
+                    UserController.refreshTokenList.push(refreshToken)
+                    res.cookie("refreshToken", refreshToken, {
+                        httpOnly: true,
+                        secure: false
+                    })
+                    res.status(200).json({username: username, accessToken: accessToken})
+                }
+            });
+
+
             // Verify Password
-            const validPassword = await bcrypt.compare(
-                password,
-                user.password
-            );
-            if(!validPassword){
-                res.status(200).json("Different password")
-            }else if(validPassword && user){
-                const accessToken=jwt.sign(
-                    {
-                        username: user.username,
-                        password: user.password
 
-                    },
-                    'secret',
-                    {expiresIn: "20s"},
-                )  // store in redux
-                const refreshToken =jwt.sign(
-                    {
-                        username: user.username,
-                        password: user.password
-
-                    },
-                    'secret',
-                    {expiresIn: 60 * 60},
-                ) // store in httpOnly Cookies
-                UserController.refreshTokenList.push(refreshToken)
-                res.cookie('refreshToken', refreshToken,{
-                    httpOnly: true,
-                    secure:true
-                })
-                res.status(200).json({username: username, accessToken: accessToken})
-            }
         }catch (e) {
             console.log(e)
         }
@@ -69,12 +83,21 @@ class UserController {
         try{
             // hash password to enhance the security of the user account
             // which store in database
+
             const salt= bcrypt.genSaltSync(10)
             const hashPassword= bcrypt.hashSync(req.body.password, salt)
-            res.json({
-                username:req.body.username,
-                password:hashPassword
-            })
+            const user={
+                id: 1,
+                name: req.body.username,
+                email: req.body.email,
+                password: hashPassword,
+            }
+           const querry=db.query('INSERT INTO user SET ?', user, function (error, results, fields) {
+               if (error) throw error;
+               // Neat!
+           });
+            res.json({msg: "success"})
+            console.log(querry.sql);
         }catch (e){
             console.log(e)
         }
