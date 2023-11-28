@@ -30,8 +30,10 @@ class MiddlewareController{
 
     // get token in redux session
     verifyAccessToken(req, res){
+        // store token in redux
+        // 20s xóa 1 cái token rồi kiểm tra xem còn refresh hay không, nếu còn sẽ tự động tạo accesstoken mới
 
     }
 
-
 }
+module.exports= new MiddlewareController()

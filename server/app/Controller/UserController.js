@@ -28,7 +28,7 @@ class UserController {
     //[POST]  /authentication/login
     async loginSubmit(req, res) {
 
-        let username= req.body.username;
+        let username= req.body.name;
         let password= req.body.password;
         try{
             let user;
@@ -90,9 +90,14 @@ class UserController {
             const hashPassword= bcrypt.hashSync(req.body.password, salt)
             const user={
                 id: UserController.id,
-                name: req.body.username,
+                name: req.body.name,
+                age: req.body.age,
+                address: req.body.address,
+                phoneNumber: req.body.phoneNumber,
                 email: req.body.email,
+                insuranceNumber: req.body.insuranceNumber,
                 password: hashPassword,
+                role: "patient"  // form đăng ký auto là bệnh nhân , bác sĩ sẽ được cấp acc
             }
            const querry=db.query('INSERT INTO user SET ?', user, function (error, results, fields) {
                if (error) throw error;
@@ -129,8 +134,6 @@ class UserController {
 
     // Redis
     async requestRefreshToken(req, res) {
-        const user = await User.find({username: req.cookies.username})
-
         try {
             const refreshToken = await req.cookies.refreshToken;
             if (!refreshToken) console.log("Refresh token is invalid");
