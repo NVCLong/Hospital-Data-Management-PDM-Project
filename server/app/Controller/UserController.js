@@ -15,7 +15,7 @@ class UserController {
 
     //[GET] /authenication/
     static refreshTokenList=[];
-    async loginForm(req,res){c
+    async loginForm(req,res){
         try{
             res.json({success:true,
             message:"Authentication form"});
@@ -68,7 +68,11 @@ class UserController {
                         httpOnly: true,
                         secure: false
                     })
-                    res.status(200).json({username: username, accessToken: accessToken})
+                    res.cookie("accessToken", accessToken, {
+                        httpOnly: true,
+                        secure: false
+                    })
+                    res.status(200).json({username: username})
                 }
             });
 
@@ -118,7 +122,7 @@ class UserController {
 
             },
             'secret',
-            {expiresIn: 60 * 60},
+            {expiresIn: 60 },
         )
     }
     generateRefreshToken(user) {
@@ -128,7 +132,7 @@ class UserController {
                 password: user.password
             },
             'secret',
-            {expiresIn: '1d'}
+            {expiresIn: "1h"}
         );
     }
 
@@ -144,18 +148,23 @@ class UserController {
                 const accessToken= this.generateAccessToken(user)
                 const newRefreshToken= this.generateRefreshToken(user)
                 UserController.refreshTokenList.push(newRefreshToken)
-                res.cookie('refreshToken', newRefreshToken,{
+                res.cookie('accessToken', accessToken,{
                     httpOnly: true,
-                    secure:true,
+                    secure:false,
                     path: '/',
                     sameSite: "strict"
                 })
-
-                res.status(200).send({accessToken:accessToken})
+                res.json({Msg: 'Access token'})
             })
         }catch (e) {
             console.log(e)
         }
+    }
+
+     logout(req, res) {
+        res.clearCookie('accessToken')
+        res.clearCookie('refreshToken')
+        res.redirect('/')
     }
 
 }

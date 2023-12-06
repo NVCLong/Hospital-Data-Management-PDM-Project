@@ -3,7 +3,7 @@ const route= express.Router();
 const doctorControler= require('../app/Controller/DoctorController')
 const middleWareController= require('../app/Controller/MiddlewareController')
 
-route.get('/promote/patient_list',middleWareController.verifyAccessToken,middleWareController.verifyRefreshToken ,doctorControler.getAllPatients)
+route.get('/patient_list',doctorControler.getAllPatients)
 
 
 module.exports= route

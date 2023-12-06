@@ -10,10 +10,12 @@ class DoctorController{
 
     //[GET] /promote/patient_list
     async getAllPatients(req, res){
-        const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
+        // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
+        // WHERE contains.d_ID=${doctorDeptid}
         try{
-            const patients= await db.query(`SELECT name, id, phoneNumber, address  FROM patients JOIN treats ON treats.pid=patients.id WHERE treats.D_id=${doctorDeptid}`)
-            res.json({patients: patients});
+            const patients= await db.query(`SELECT name, id, phoneNumber, address  FROM usersx`)
+            console.log(patients);
+            res.status(200).json(patients);
         }catch(error){
             console.log(error)
         }

@@ -6,7 +6,7 @@ const jwt= require('jsonwebtoken')
 
 // wait until with
 
-class MiddlewareController{
+const MiddlewareController={
     verifyRefreshToken(req,res){
         const token = req.cookies.refreshToken;
         if(token){
@@ -14,7 +14,8 @@ class MiddlewareController{
                 if(err){
                     res.redirect('authentication')
                 }
-                userController.requestRefreshToken(req,res).then(
+                userController.requestRefreshToken(req,res).
+                then(
                     function () {
                         console.log("Successfully")
                     }
@@ -25,15 +26,26 @@ class MiddlewareController{
         }else{
             res.redirect('/authentication')
         }
-    }
+    },
 
 
     // get token in redux session
-    verifyAccessToken(req, res){
+    verifyAccessToken(req, res, next){
         // store token in redux
         // 20s xóa 1 cái token rồi kiểm tra xem còn refresh hay không, nếu còn sẽ tự động tạo accesstoken mới
+        const token= req.cookies.accessToken
+        if(token){
+            jwt.verify(token,'secret',(err,user)=>{
+                if(err){
+                    res.redirect('authentication')
+                }
+                req.user= user
+            })
+        }else {
+            this.verifyRefreshToken(req,res)
+        }
 
     }
 
 }
-module.exports= new MiddlewareController()
+module.exports= MiddlewareController
