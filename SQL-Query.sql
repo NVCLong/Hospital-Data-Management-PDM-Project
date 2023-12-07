@@ -1,7 +1,53 @@
+CREATE TABLE Departments (
+  deptId INT NOT NULL PRIMARY KEY,
+  deptName VARCHAR(255) NOT NULL,
+  numberOfDoctor INT NOT NULL DEFAULT 0,
+  deptCode VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE Doctors (
+  dId INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(255) NOT NULL,
+  position VARCHAR(255) NOT NULL,
+  deptCode INT NOT NULL,
+  PRIMARY KEY (dId),
+  FOREIGN KEY (deptCode) REFERENCES Departments (deptCode)
+);
+
+CREATE TABLE Patients (
+  pId INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  phoneNumber VARCHAR(255) NOT NULL,
+  role VARCHAR(255) NOT NULL,
+  PRIMARY KEY (pId)
+);
+
+CREATE TABLE Appointments (
+  dId INT NOT NULL,
+  pId INT NOT NULL,
+  meetDate DATE NOT NULL,
+  meetTime TIME NOT NULL,
+  FOREIGN KEY (dId) REFERENCES Doctors (dId),
+  FOREIGN KEY (pId) REFERENCES Patients (pId)
+);
+
+CREATE TABLE inChargeOf (
+  id INT NOT NULL PRIMARY KEY,
+  dId INT NOT NULL,
+  pId INT NOT NULL,
+  FOREIGN KEY (dId) REFERENCES doctors (dId),
+  FOREIGN KEY (pId) REFERENCES patients (pId)
+);
+
 INSERT INTO Departments VALUES
-  (1, 'General Medicine'),
-  (2, 'Pediatrics'),
-  (3, 'Dermatology');
+  (1, 'General Medicine', 1),
+  (2, 'Pediatrics', 2),
+  (3, 'Dermatology', 2);
 
 INSERT INTO Doctors VALUES
   (1, 'Nguyen Van An', 'nguyenvanan@gmail.com', '0912345678', 'General Practitioner', 1),
