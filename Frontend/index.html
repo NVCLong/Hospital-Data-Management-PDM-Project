@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hospital Data Management - PDM Project</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  href="style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dee05b2660.js" crossorigin="anonymous"></script>
+    <title>Hospital Data Management - PDM Project</title>
 </head>
 <body>
-  <div class="wrapper">
-    <form action="">
-      <h1>Create your account!</h1>
+    <div class="container">
+        <div class="form-box">
+            <h1 id="title">REGISTER</h1>
+            <form>
 
-      <div class="input-box">
-        <input type="text" placeholder="Username" required>
-        <i class='bx bxs-user'></i>
-      </div>
+                <div class="input-group">
+                    <div class="input-field" id="usernameField">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Enter your username" required>
+                    </div>
 
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-        <i class='bx bxs-lock-alt' ></i>
-      </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
 
-      <div class="remember-forgot">
-        <label><input type="checkbox">Remember me</label>
-        <a href="#">Forgot password?</a>
-      </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Enter your password" required>
+                    </div>
 
-      <button type="submit" class="btn">LOGIN</button>
+                <a href="#" style="color: #cee5ff; text-decoration: none">Forgotten password?</a>
+                </div>
 
-      <div class="register-link">
-        <p>Dont have an account? <a href="#">Register</a></p>
-      </div>
-    </form>
-
-
-
-
-
+                <div class="btn-field">
+                    <button type="button" id="registerBtn">REGISTER</button>
+                    <button type="button" id="loginBtn" class="disable">LOGIN</button>
+                </div>
 
 
-  </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
