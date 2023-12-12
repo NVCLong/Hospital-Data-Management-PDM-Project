@@ -9,6 +9,6 @@ route.get(
     middlewareController.verifyAccessToken,
     siteController.showUser
 );
-route.get("/", middlewareController.verifyAccessToken, siteController.homepage);
+route.get("/", siteController.homepage);
 
 module.exports = route;

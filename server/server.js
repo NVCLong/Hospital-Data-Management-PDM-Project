@@ -26,8 +26,8 @@ app.engine('handlebars', expressHandlebars.engine({
     extname:'hbs'
 }),
 );
-app.set('view engine','handlebars')
-app.set('views', join(__dirname,'resource','views'))
+app.set('view engine','handlebars');
+app.set('views', join(__dirname,'resource/views'))
 
 
 const db = (connect = mysql.createConnection({

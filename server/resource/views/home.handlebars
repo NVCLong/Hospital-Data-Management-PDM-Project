@@ -1,0 +1,38 @@
+
+<div class="container">
+    <div class="carousel">
+        <input type="radio" id="carousel-0" name="carousel[]" checked>
+        <input type="radio" id="carousel-1" name="carousel[]">
+        <input type="radio" id="carousel-2" name="carousel[]">
+        <input type="radio" id="carousel-3" name="carousel[]">
+        <input type="radio" id="carousel-4" name="carousel[]">
+        <ul class="carousel__items">
+            {{#each courses}}
+                <li class="carousel__item">
+                    <img class="image" src="{{this.image}}" alt="">
+                </li>
+            {{/each}}
+        </ul>
+        <div class="carousel__prev">
+            <label for="carousel-0"></label>
+            <label for="carousel-1"></label>
+            <label for="carousel-2"></label>
+            <label for="carousel-3"></label>
+            <label for="carousel-4"></label>
+        </div>
+        <div class="carousel__next">
+            <label for="carousel-0"></label>
+            <label for="carousel-1"></label>
+            <label for="carousel-2"></label>
+            <label for="carousel-3"></label>
+            <label for="carousel-4"></label>
+        </div>
+        <div class="carousel__nav">
+            <label for="carousel-0"></label>
+            <label for="carousel-1"></label>
+            <label for="carousel-2"></label>
+            <label for="carousel-3"></label>
+            <label for="carousel-4"></label>
+        </div>
+    </div>
+</div>
