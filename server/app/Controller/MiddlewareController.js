@@ -40,7 +40,7 @@ const MiddlewareController = {
                 req.user = user;
             });
         } else {
-            verifyRefreshToken(req, res);
+            this.verifyRefreshToken(req, res);
         }
     },
 };

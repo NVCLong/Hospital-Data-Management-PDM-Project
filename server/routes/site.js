@@ -6,7 +6,6 @@ const middlewareController = require("../app/Controller/MiddlewareController");
 
 route.get(
     "/show",
-    middlewareController.verifyAccessToken,
     siteController.showUser
 );
 route.get("/", siteController.homepage);

@@ -17,12 +17,93 @@ class UserController {
     static refreshTokenList = [];
     async loginForm(req, res) {
         try {
-            res.json({ success: true, message: "Authentication form" });
+            res.render('authentication/loginForm');
         } catch (e) {
             console.log(e);
             res.json({ success: false });
         }
     }
+
+    //[GET]  /authentication/register
+    registerForm(req,res){
+        res.render('authentication/registerForm');
+    }
+
+    //[GET] authentication/doctor/loginForm
+    async loginFormDoctor(req, res) {
+        try {
+            res.render('authentication/loginDoctor');
+        } catch (e) {
+            console.log(e);
+            res.json({ success: false });
+        }
+    }
+
+    //[GET]  /authentication/doctor/registerForm
+    registerFormDoctor(req,res){
+        res.render('authentication/registerDoctor');
+    }
+
+    //[POST] /authentication/doctor/submit
+    async loginDoctorSubmit(req, res) {
+        let username = req.body.name;
+        let password = req.body.password;
+        try {
+            let user;
+            db.query(
+                `select * from doctors where name = '${username}'`,
+                async (err, result) => {
+                    user = result[0];
+                    if (!user) {
+                        res.status(404).json("error");
+                    }
+                    const validPassword = await bcrypt.compare(password, user.password);
+                    if (!validPassword) {
+                        res.status(200).json("Different password");
+                    } else if (validPassword && user) {
+                        const accessToken = jwt.sign(
+                            {
+                                username: user.name,
+                                password: user.password,
+                            },
+                            "secret",
+                            { expiresIn: "20s" }
+                        ); // store in redux
+                        const refreshToken = jwt.sign(
+                            {
+                                username: user.name,
+                                password: user.password,
+                            },
+                            "secret",
+                            { expiresIn: 60 * 60 }
+                        );
+                        // store in httpOnly Cookies
+                        UserController.refreshTokenList.push(refreshToken);
+                        res.cookie("refreshToken", refreshToken, {
+                            httpOnly: true,
+                            secure: false,
+                        });
+                        res.cookie("accessToken", accessToken, {
+                            httpOnly: true,
+                            secure: false,
+                        });
+                        res.cookie("d_ID",user.doctor_ID,{
+                            httpOnly: true,
+                            secure: true
+                        })
+                        res.status(200).json({ username: username });
+                    }
+                }
+            );
+
+            // Verify Password
+        } catch (e) {
+            console.log(e);
+        }
+        // store user to database
+    }
+
+
     //[POST]  /authentication/login
     async loginSubmit(req, res) {
         let username = req.body.name;
