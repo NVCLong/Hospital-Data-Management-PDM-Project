@@ -22,13 +22,13 @@ app.use(morgan("combined"));
 routes(app);
 
 // use template engine
-app.engine('handlebars', expressHandlebars.engine({
-    extname:'hbs'
-}),
+app.engine('handlebars', expressHandlebars.engine(
+    {  extname:'hbs'}
+    ),
 );
-app.set('view engine','handlebars');
-app.set('views', join(__dirname,'resource/views'))
-
+app.set('view engine','handlebars')
+app.set('views', join(__dirname,'resource','views'));
+console.log(__dirname);
 
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
