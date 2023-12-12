@@ -1,7 +1,7 @@
 class SiteController {
     //[GET]  /
     homepage(req, res) {
-        res.render('main');
+        res.render('layout/main');
         // UI will render something depend on frontend and UI (do not have response data)
     }
     showUser(req, res) {
