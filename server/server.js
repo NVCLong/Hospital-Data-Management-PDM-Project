@@ -30,7 +30,6 @@ app.set('view engine','handlebars')
 app.set('views', join(__dirname,'resource','views'));
 console.log(__dirname);
 
-
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
