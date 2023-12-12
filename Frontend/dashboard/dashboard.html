@@ -1,67 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link  href="/dashboard/dashboard.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link id="theme" rel="stylesheet" href="/dashboard/dashboard.css" />
     <script src="https://kit.fontawesome.com/dee05b2660.js" crossorigin="anonymous"></script>
-    <title>Home - Hospital Data Management</title>
-</head>
-<body>
-        <div class="container">
-            <nav>
-                <li><a href="#" class="logo">
-                    <img src="/src/images/PDM_logo.png" alt="logo">
-                    <span class="nav-item">Dashboard</span>
-                </a></li>
 
-                <li><a href="#">
-                    <i class="fa-solid fa-home"></i>
-                    <span class="nav-item">Home</span>
-                </a></li>
+    <title></title>
+  </head>
+  <body>
+    <div class="site-wrap">
+      <nav class="site-nav">
+        <div class="name">Dashboard | Doctor</div>
 
-                <li><a href="#">
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <span class="nav-item">Appointment</span>
-                </a></li>
+        <ul>
+          <li class="active">
+            <i class="fa-solid fa-bed-pulse"></i>
+            <a href="#">Patients</a>
+            <ul>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+            </ul>
+          </li>
 
-                <li><a href="#">
-                    <i class="fa-solid fa-user-doctor"></i>
-                    <span class="nav-item">Doctors</span>
-                </a></li>
+          <li>
+            <a href="#">Appointments</a>
+            <ul>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+            </ul>
+          </li>
 
-                <li><a href="#">
-                    <i class="fa-solid fa-credit-card"></i>
-                    <span class="nav-item">Payment</span>
-                </a></li>
+          <li>
+            <a href="#">Reports</a>
+            <ul>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+            </ul>
+          </li>
 
-                <li><a href="#">
-                    <i class="fa-solid fa-cog"></i>
-                    <span class="nav-item">Settings</span>
-                </a></li>
+          <li>
+            <a href="#">Settings</a>
+            <ul>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+              <li><a href="#0">X</a></li>
+            </ul>
+          </li>
 
-                <li><a href="#">
-                    <i class="fa-solid fa-sign-out-alt"></i>
-                    <span class="nav-item">Logout</span>
-                </a></li>
+        </ul>
 
-            </nav>
+        <div class="note">
+          <h3>PDM Project</h3>
+          <p>Hospital Data Management</p>
         </div>
+      </nav>
 
+      <main>
+        <header>
+          <div class="breadcrumbs">
+            <i class="fa-solid fa-home"></i>
+            <a href="#0/">Home</a>
+          </div>
 
+          <h1 class="title">Patients</h1>
 
+          <nav class="nav-tabs" id="nav-tabs">
+            <a href="#0" class="active">
+              Today
+              <span>14</span>
+            </a>
+            <a href="#0">
+              Pending
+              <span>24</span>
+            </a>
+            <a href="#0">
+              Hospital discharge
+              <span>124</span>
+            </a>
+          </nav>
+        </header>
 
-
-
-
-
-
-
-
-
-
-
-
+        <div class="content-columns">
+          <div class="col">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="col">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="col">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="col">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+        </div>
+      </main>
+    </div>
     <script src="/dashboard/dashboard.js"></script>
-</body>
+  </body>
 </html>
