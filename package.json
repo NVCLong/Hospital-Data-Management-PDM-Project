@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --inspect server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon --watch server/server.js"
+    "watch": "sass --no-source-map --watch server/resource/scss/app.scss server/public/css/app.css"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "express-handlebars": "^7.1.2",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "node-sass": "^9.0.0"
   }
 }
