@@ -38,10 +38,12 @@ CREATE TABLE Appointments (
 CREATE TABLE inChargeOf (
   startDay DATE NOT NULL,
   dId INT NOT NULL,
-  pId INT NOT NULL,
+  pId INT NOT NULL ,
+  pName VARCHAR(255) NOT NULL,
+  details VARCHAR(255),
   FOREIGN KEY (dId) REFERENCES Doctors (dId),
-  FOREIGN KEY (pId) REFERENCES Patients (pId),
-);
+  FOREIGN KEY (pId) REFERENCES Patients (pId)
+ );
 
 
 CREATE TABLE contain (
@@ -89,13 +91,13 @@ INSERT INTO Appointments VALUES
 
 
   -- Thêm dữ liệu vào bảng inChargeOf
-INSERT INTO inChargeOf (startDay, dId, pId) VALUES
-  ('2023-12-08', 1, 1),  -- Doctor 1 in charge of Patient 1 from 2023-12-08
-  ('2023-12-09', 2, 2),  -- Doctor 2 in charge of Patient 2 from 2023-12-09
-  ('2023-12-10', 3, 3),  -- Doctor 3 in charge of Patient 3 from 2023-12-10
-  ('2023-12-13', 4, 4),  -- Doctor 4 in charge of Patient 4 from 2023-12-13
-  ('2023-12-11', 5, 5),  -- Doctor 5 in charge of Patient 5 from 2023-12-11
-  ('2024-01-10', 3, 6);  -- Doctor 3 in charge of Patient 6 from 2024-01-10
+INSERT INTO inChargeOf (startDay, dId, pId,pName, details) VALUES
+  ('2023-12-08', 1, 1,'Vo Van Xuan','Benh dai'),  -- Doctor 1 in charge of Patient 1 from 2023-12-08
+  ('2023-12-09', 2, 2,'Nguyen Thi Quynh','Dau dau'),  -- Doctor 2 in charge of Patient 2 from 2023-12-09
+  ('2023-12-10', 3, 3,'Tran Dinh Hau','Dang on'),  -- Doctor 3 in charge of Patient 3 from 2023-12-10
+  ('2023-12-13', 4, 4,'Tran Dinh Hau', 'Nguy kich'),  -- Doctor 4 in charge of Patient 4 from 2023-12-13
+  ('2023-12-11', 5, 5,'Tran Thi Kim Loan', 'Tien trien tot'),  -- Doctor 5 in charge of Patient 5 from 2023-12-11
+  ('2024-01-10', 3, 6,'Hoang The Em','Xuat vien');  -- Doctor 3 in charge of Patient 6 from 2024-01-10
 
 -- Thêm dữ liệu vào bảng contain
 INSERT INTO contain (deptId, pId) VALUES

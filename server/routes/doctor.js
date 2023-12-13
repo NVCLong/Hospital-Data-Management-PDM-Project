@@ -5,6 +5,9 @@ const middleWareController = require("../app/Controller/MiddlewareController");
 
 route.get("/patient_list", doctorControler.getAllPatients);
 route.get("/getAllAppointments", doctorControler.getAllAppointment);
-route.get("/updateInchargeList", doctorControler.updateInChargeList);
+route.get("/inchargeForm/:id", doctorControler.inChargeForm);
+route.post("/inchargeForm/:id",doctorControler.inChargeFormPost);
+route.get("/inchargeForm/:id",doctorControler.updateForm)
+route.patch("/inchargeForm/:id",doctorControler.updateDetail)
 
 module.exports = route;

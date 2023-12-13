@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mysql = require("mysql");
 const { RANDOM } = require("mysql/lib/PoolSelector");
+const {SQLToObject} = require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -12,6 +13,7 @@ const db = (connect = mysql.createConnection({
 
 class UserController {
     static id = 0;
+    static docId =1;
 
     //[GET] /authenication/
     static refreshTokenList = [];
@@ -44,40 +46,56 @@ class UserController {
         res.render('authentication/registerDoctor');
     }
 
+    //[GET]] /authentication/doctor/register
+    async registerDoctor(req,res){
+        try{
+            // hash password to enhance the security of the user account
+            // which store in database
+
+            const salt = bcrypt.genSaltSync(10);
+            const hashPassword = bcrypt.hashSync(req.body.password, salt);
+            const user = {
+                dId: UserController.docId,
+                name: req.body.name,
+                email: req.body.email,
+                phone: req.body.phone,
+                position: req.body.position,
+                password: req.body.password,
+                deptCode: req.body.deptCode,
+            };
+            const querry = db.query(
+                "INSERT INTO patients SET ?",
+                user,
+                function (error, results, fields) {
+                    if (error) throw error;
+                    // Neat!
+                }
+            );
+            UserController.id++;
+            res.json({ msg: "success" });
+
+        }catch(e){
+            console.log(e)
+        }
+    }
     //[POST] /authentication/doctor/submit
     async loginDoctorSubmit(req, res) {
-        let username = req.body.name;
+        let email = req.body.email;
         let password = req.body.password;
         try {
-            let user;
             db.query(
-                `select * from doctors where name = '${username}'`,
+                `select * from doctors where email = '${email}'`,
                 async (err, result) => {
-                    user = result[0];
-                    if (!user) {
+                     let doctor = result;
+                    if (!doctor) {
                         res.status(404).json("error");
                     }
-                    const validPassword = await bcrypt.compare(password, user.password);
+                    const validPassword = await bcrypt.compare(password, doctor.password);
                     if (!validPassword) {
                         res.status(200).json("Different password");
-                    } else if (validPassword && user) {
-                        const accessToken = jwt.sign(
-                            {
-                                username: user.name,
-                                password: user.password,
-                            },
-                            "secret",
-                            { expiresIn: "20s" }
-                        ); // store in redux
-                        const refreshToken = jwt.sign(
-                            {
-                                username: user.name,
-                                password: user.password,
-                            },
-                            "secret",
-                            { expiresIn: 60 * 60 }
-                        );
-                        // store in httpOnly Cookies
+                    } else if (validPassword && doctor) {
+                        let accessToken=this.generateAccessToken(doctor)
+                        let refreshToken=this.generateRefreshToken(doctor)
                         UserController.refreshTokenList.push(refreshToken);
                         res.cookie("refreshToken", refreshToken, {
                             httpOnly: true,
@@ -87,11 +105,11 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.cookie("d_ID",user.doctor_ID,{
+                        res.cookie("d_ID",doctor.dId,{
                             httpOnly: true,
-                            secure: true
+                            secure: false
                         })
-                        res.status(200).json({ username: username });
+                        res.status(200).render("home",{doctor: SQLToObject(doctor)});
                     }
                 }
             );
@@ -106,37 +124,23 @@ class UserController {
 
     //[POST]  /authentication/login
     async loginSubmit(req, res) {
-        let username = req.body.name;
+        let email = req.body.email;
         let password = req.body.password;
         try {
-            let user;
+
             db.query(
-                `select * from user where name = '${username}'`,
+                `select * from patients where email = '${email}'`,
                 async (err, result) => {
-                    user = result[0];
-                    if (!user) {
+                    let patient = result[0];
+                    if (!patient) {
                         res.status(404).json("error");
                     }
-                    const validPassword = await bcrypt.compare(password, user.password);
+                    const validPassword = await bcrypt.compare(password, patient.password);
                     if (!validPassword) {
                         res.status(200).json("Different password");
-                    } else if (validPassword && user) {
-                        const accessToken = jwt.sign(
-                            {
-                                username: user.name,
-                                password: user.password,
-                            },
-                            "secret",
-                            { expiresIn: "20s" }
-                        ); // store in redux
-                        const refreshToken = jwt.sign(
-                            {
-                                username: user.name,
-                                password: user.password,
-                            },
-                            "secret",
-                            { expiresIn: 60 * 60 }
-                        );
+                    } else if (validPassword && patient) {
+                        let accessToken= this.generateAccessToken(patient)
+                        let refreshToken= this.generateRefreshToken(patient)
                         // store in httpOnly Cookies
                         UserController.refreshTokenList.push(refreshToken);
                         res.cookie("refreshToken", refreshToken, {
@@ -147,7 +151,11 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.status(200).json({ username: username });
+                        res.cookie("pId", patient.pId,{
+                            httpOnly: true,
+                            secure: false,
+                        } )
+                        res.render("home",{patient: SQLToObject(patient)})
                     }
                 }
             );
@@ -167,18 +175,16 @@ class UserController {
             const salt = bcrypt.genSaltSync(10);
             const hashPassword = bcrypt.hashSync(req.body.password, salt);
             const user = {
-                id: UserController.id,
+                pId: UserController.id,
                 name: req.body.name,
-                age: req.body.age,
+                email: req.body.email,
+                password: hashPassword,
                 address: req.body.address,
                 phoneNumber: req.body.phoneNumber,
-                email: req.body.email,
-                insuranceNumber: req.body.insuranceNumber,
-                password: hashPassword,
-                role: "patient", // form đăng ký auto là bệnh nhân , bác sĩ sẽ được cấp acc
+                role: "Patient",
             };
             const querry = db.query(
-                "INSERT INTO user SET ?",
+                "INSERT INTO patients SET ?",
                 user,
                 function (error, results, fields) {
                     if (error) throw error;
@@ -195,7 +201,7 @@ class UserController {
     generateAccessToken(user) {
         return jwt.sign(
             {
-                username: user.username,
+                name: user.name,
                 password: user.password,
             },
             "secret",
@@ -205,7 +211,7 @@ class UserController {
     generateRefreshToken(user) {
         return jwt.sign(
             {
-                username: user.username,
+                name: user.name,
                 password: user.password,
             },
             "secret",
