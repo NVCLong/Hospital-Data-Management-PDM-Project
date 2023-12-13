@@ -64,13 +64,13 @@ class DoctorController {
                      throw err;
                  }
             })
-            res.redirect("/doctor/patient_list");
+            res.redirect("/doctor/patientList");
         }catch (e) {
             console.log(e);
         }
     }
 
-    //[PATCH]  /doctor/updateInchargeDetails/:id
+    //GET]  /doctor/updateInchargeDetails/:id
     async updateForm(req,res){
         try{
             await db.query(`SELECT details FROM inchargef WHERE inchargeof.pId= ${req.params.id}`, (err, res)=>{
