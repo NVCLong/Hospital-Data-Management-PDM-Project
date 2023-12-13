@@ -187,7 +187,7 @@ class UserController {
             );
             UserController.id++;
             res.json({ msg: "success" });
-            console.log(querry.sql);
+
         } catch (e) {
             console.log(e);
         }
