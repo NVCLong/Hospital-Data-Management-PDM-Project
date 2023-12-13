@@ -78,7 +78,7 @@ class UserController {
             console.log(e)
         }
     }
-    //[POST] /authentication/doctor/submit
+    //[POST] /authentication/doctor/login
     async loginDoctorSubmit(req, res) {
         let email = req.body.email;
         let password = req.body.password;
@@ -247,6 +247,7 @@ class UserController {
         }
     }
 
+    //[POST] /authentication/logout
     logout(req, res) {
         res.clearCookie("accessToken");
         res.clearCookie("refreshToken");
