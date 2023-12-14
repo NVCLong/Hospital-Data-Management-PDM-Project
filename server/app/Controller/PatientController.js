@@ -4,42 +4,41 @@ const { multipleSQLToObject, SQLToObject } = require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "",
+    password: "password123",
     port: 3306,
     database: "test",
 }));
 
 class PatientController {
-    async getAllPatients(req, res) {
+    // [GET] /patient/appointments
+    async getPatientAppointments(req, res) {
+        const patientId = req.cookies.p_ID;
         try {
-            await db.query(`SELECT * FROM patients`, (err, result) => {
-                res.render("patient/patient_list", { patients: SQLToObject(result) });
+            // retrive data from database
+            await db.query(
+                `SELECT * FROM appointments WHERE pId=${patientId}`,
+                (err, result) => {
+                    if (err) throw err;
+                }
+            );
+            res.render("patient/appointments", {
+                appointments: multipleSQLToObject(result),
             });
         } catch (error) {
             console.log(error);
         }
     }
-
     // [GET] /patitent/details/:id
     async getPatientDetails(req, res) {
+        const patientId = req.params.id;
         try {
-            const patientId = req.params.id;
             await db.query(
                 `SELECT * FROM user WHERE id=${patientId}`,
                 (err, result) => {
                     if (err) {
                         throw err;
                     }
-
-                    const patientData = SQLToObject(result);
-                    const patient = new Patient(
-                        patientData.id,
-                        patientData.name,
-                        patientData.age,
-                        patientData.insuranceNumber
-                    );
-
-                    res.render("patient/patient_details", { user: patient });
+                    res.render("patient/details", { patients: result });
                 }
             );
         } catch (error) {
@@ -56,7 +55,7 @@ class PatientController {
                     if (err) throw err;
 
                     const patient = SQLToObject(result);
-                    res.render("patient/edit_patient", { user: patient });
+                    res.render("patient/editInfo", { user: patient });
                 }
             );
         } catch (error) {
@@ -76,7 +75,6 @@ class PatientController {
                 [name, age, address, phoneNumber, insuranceNumber, password, patientId],
                 (err, result) => {
                     if (err) throw err;
-
                     res.redirect("/patient/details/" + patientId);
                 }
             );

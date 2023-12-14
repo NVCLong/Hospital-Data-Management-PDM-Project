@@ -6,14 +6,14 @@ const { normalizeType } = require("express/lib/utils");
 const morgan = require("morgan");
 const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
-const  expressHandlebars = require("express-handlebars")
-const {join} = require("path");
+const expressHandlebars = require("express-handlebars");
+const { join } = require("path");
 
 app.use(express.json());
 app.use(express.urlencoded());
 
 // static file
-app.use(express.static(join(__dirname,'public')));
+app.use(express.static(join(__dirname, "public")));
 // apply the cookie parser that we can interact with client cookies
 app.use(cookieParser());
 //morgan
@@ -22,13 +22,14 @@ app.use(morgan("combined"));
 routes(app);
 
 // use template engine
-app.engine('handlebars', expressHandlebars.engine({
-    extname:'hbs'
-}),
+app.engine(
+    "handlebars",
+    expressHandlebars.engine({
+        extname: "hbs",
+    })
 );
-app.set('view engine','handlebars');
-app.set('views', join(__dirname,'resource/views'))
-
+app.set("view engine", "handlebars");
+app.set("views", join(__dirname, "resource/views"));
 
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
