@@ -85,7 +85,7 @@ class DoctorController {
         }
     }
 
-    //GET]  /doctor/updateInchargeDetails/:id
+    //[GET]  /doctor/updateInchargeDetails/:id
     async updateForm(req, res) {
         try {
             await db.query(

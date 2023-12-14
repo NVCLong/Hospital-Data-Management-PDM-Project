@@ -1,5 +1,4 @@
 const mysql = require("mysql");
-const sqlObject = require("../../untils/Sql");
 const { multipleSQLToObject, SQLToObject } = require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
@@ -28,12 +27,58 @@ class PatientController {
             console.log(error);
         }
     }
+
+    // [GET] /patient/newAppointment:id
+    async showNewAppointmentForm(req, res) {
+        try {
+            const patientID = req.cookies.p_ID;
+            const doctors = await this.getAvailableDoctors();
+            res.render("patient/newAppointment", { patientID, doctors });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // [POST] /patient/newAppointment:id
+    async createNewAppointmentPost(req, res) {
+        const newAppointment = {
+            dId: req.body.dId,
+            pId: req.cookies.p_ID,
+            date: req.body.date,
+            time: req.body.time,
+        };
+        try {
+            await db.query(
+                `INSERT INTO appointments SET ?`,
+                newAppointment,
+                (err, result) => {
+                    if (err) throw err;
+                    res.redirect("/patient/appointments");
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // Fetch a vailable doctors
+    async getAvailableDoctors() {
+        try {
+            const d_ID = req.cookies.d_ID;
+            const doctors = await db.query(
+                `SELECT * FROM user WHERE role = 'doctor' AND id NOT IN (SELECT dId=${d_ID} FROM appointments)`
+            );
+            return doctors;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     // [GET] /patitent/details/:id
     async getPatientDetails(req, res) {
         const patientId = req.params.id;
         try {
             await db.query(
-                `SELECT * FROM user WHERE id=${patientId}`,
+                `SELECT * FROM user WHERE role = 'patient' AND id=${patientId}`,
                 (err, result) => {
                     if (err) {
                         throw err;
@@ -50,7 +95,7 @@ class PatientController {
         try {
             const patientId = req.params.id;
             await db.query(
-                `SELECT * FROM user WHERE id=${patientId}`,
+                `SELECT * FROM user WHERE role = 'patient' AND id=${patientId}`,
                 (err, result) => {
                     if (err) throw err;
 
