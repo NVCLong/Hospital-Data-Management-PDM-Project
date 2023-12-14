@@ -11,12 +11,13 @@ const db = (connect = mysql.createConnection({
 class DoctorController {
     //[GET] /doctor/patient_list
     async getAllPatients(req, res) {
-        const dId= req.cookies.dId;
+        const d_Id= req.cookies.d_ID;
         // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
         try {
-            await db.query(`SELECT *  FROM inchargeof  WHERE dId=${dId}`,(err, result) => {
+            await db.query(`SELECT *  FROM inchargeof  WHERE dId=${d_Id}`,(err, result) => {
                 if (err) { throw err; }
-                res.render('doctor/patient_list',{patients: SQLToObject(result)})
+                console.log(typeof  result)
+                res.render('doctor/patient_list',{patients: result})
             });
         } catch (error) {
             console.log(error);
@@ -26,7 +27,7 @@ class DoctorController {
     //[GET] /doctor/ getAllAppointments
     async getAllAppointment(req, res){
         try {
-            const dId=req.cookies.dId;
+            const dId=req.cookies.d_ID;
             await db.query(`SELECT name, date, time FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`,(err,result)=>{
                 res.render("doctor/appointmentList",{appointment: multipleSQLToObject(result)});
             } );
@@ -40,7 +41,7 @@ class DoctorController {
         try {
             const d_ID= req.cookies.d_ID
           await  db.query(`SELECT name,age,pId FROM patients WHERE patients.pId= ${req.params.id}`, (err, res) => {
-                result.status(200).render('doctor/inChargeForm', {patient: SQLToObject(res), d_ID: d_ID});
+                result.status(200).render('doctor/inChargeForm', {patient: res, d_ID: d_ID});
             })
         }catch (e) {
             console.log(e);
@@ -78,7 +79,7 @@ class DoctorController {
                     console.log(err)
                     throw err;
                 }
-                res.render("doctor/updateInchargeDetails",{details:SQLToObject(res)})
+                res.render("doctor/updateInchargeDetails",{details:res})
             })
         }catch (e) {
             console.log(e);
@@ -93,7 +94,7 @@ class DoctorController {
                     console.log(err)
                     throw err
                 }
-                res.redirect('')
+                res.redirect('doctor/patient_list')
             })
         }catch (e) {
             console.log(e)

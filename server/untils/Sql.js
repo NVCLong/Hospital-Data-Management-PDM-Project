@@ -1,10 +1,12 @@
-module.exports = {
-    multipleSQLToObject: function (mongooseArray) {
-        return mongooseArray.map(function (course) {
-            return course.toObject();
+class Untils{
+    multipleSQLToObject (SQLArray) {
+        return SQLArray.map(function (SQL) {
+            return SQL.toObject();
         });
-    },
-   SQLToObject: function (mongooses) {
-        return mongooses.toObject();
+    }
+    SQLToObject(SQl) {
+        return SQl.toObject();
     }
 }
+
+module.exports = new Untils();

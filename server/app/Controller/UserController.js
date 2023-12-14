@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mysql = require("mysql");
 const { RANDOM } = require("mysql/lib/PoolSelector");
-const {SQLToObject} = require("../../untils/Sql");
+const untils= require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -86,7 +86,7 @@ class UserController {
             db.query(
                 `select * from doctors where email = '${email}'`,
                 async (err, result) => {
-                     let doctor = result;
+                     let doctor = result[0];
                     if (!doctor) {
                         res.status(404).json("error");
                     }
@@ -94,8 +94,22 @@ class UserController {
                     if (!validPassword) {
                         res.status(200).json("Different password");
                     } else if (validPassword && doctor) {
-                        let accessToken=this.generateAccessToken(doctor)
-                        let refreshToken=this.generateRefreshToken(doctor)
+                        let accessToken=jwt.sign(
+                            {
+                                name: doctor.email,
+                                password: doctor.password,
+                            },
+                            "secret",
+                            { expiresIn: 60 }
+                        );
+                        let refreshToken=jwt.sign(
+                            {
+                                name: doctor.email,
+                                password: doctor.password,
+                            },
+                            "secret",
+                            { expiresIn: "1h" }
+                        );
                         UserController.refreshTokenList.push(refreshToken);
                         res.cookie("refreshToken", refreshToken, {
                             httpOnly: true,
@@ -109,7 +123,7 @@ class UserController {
                             httpOnly: true,
                             secure: false
                         })
-                        res.status(200).render("home",{doctor: SQLToObject(doctor)});
+                        res.status(200).render("home",{doctor: doctor});
                     }
                 }
             );
@@ -132,6 +146,7 @@ class UserController {
                 `select * from patients where email = '${email}'`,
                 async (err, result) => {
                     let patient = result[0];
+                    console.log(patient)
                     if (!patient) {
                         res.status(404).json("error");
                     }
@@ -139,8 +154,22 @@ class UserController {
                     if (!validPassword) {
                         res.status(200).json("Different password");
                     } else if (validPassword && patient) {
-                        let accessToken= this.generateAccessToken(patient)
-                        let refreshToken= this.generateRefreshToken(patient)
+                        let accessToken=jwt.sign(
+                            {
+                                email: patient.email,
+                                password: patient.password,
+                            },
+                            "secret",
+                            { expiresIn: 60 }
+                        );
+                        let refreshToken= jwt.sign(
+                            {
+                                email: patient.email,
+                                password: patient.password,
+                            },
+                            "secret",
+                            { expiresIn: "1h" }
+                        );
                         // store in httpOnly Cookies
                         UserController.refreshTokenList.push(refreshToken);
                         res.cookie("refreshToken", refreshToken, {
@@ -155,7 +184,7 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         } )
-                        res.render("home",{patient: SQLToObject(patient)})
+                        res.render("home",{patient: patient})
                     }
                 }
             );
@@ -201,7 +230,7 @@ class UserController {
     generateAccessToken(user) {
         return jwt.sign(
             {
-                name: user.name,
+                name: user.email,
                 password: user.password,
             },
             "secret",
@@ -211,7 +240,7 @@ class UserController {
     generateRefreshToken(user) {
         return jwt.sign(
             {
-                name: user.name,
+                name: user.email,
                 password: user.password,
             },
             "secret",
