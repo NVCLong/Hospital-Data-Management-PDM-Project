@@ -118,7 +118,7 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.cookie("d_ID", doctor.dId, {
+                        res.cookie("dId", doctor.dId, {
                             httpOnly: true,
                             secure: false,
                         });

@@ -11,18 +11,21 @@ const db = (connect = mysql.createConnection({
 class PatientController {
     // [GET] /patient/appointments
     async getPatientAppointments(req, res) {
-        const patientId = req.cookies.p_ID;
+        const patientId = req.cookies.pId;
         try {
             // retrive data from database
             await db.query(
                 `SELECT * FROM appointments WHERE pId=${patientId}`,
                 (err, result) => {
-                    if (err) throw err;
+                    if (err) {
+                        throw err;
+                    }
+                    console.log(result);
+                    res.render("patient/appointments", {
+                        appointments: result,
+                    });
                 }
             );
-            res.render("patient/appointments", {
-                appointments: multipleSQLToObject(result),
-            });
         } catch (error) {
             console.log(error);
         }
@@ -31,21 +34,34 @@ class PatientController {
     // [GET] /patient/newAppointment:id
     async showNewAppointmentForm(req, res) {
         try {
-            const patientID = req.cookies.p_ID;
-            const doctors = await this.getAvailableDoctors();
-            res.render("patient/newAppointment", { patientID, doctors });
+            const patientID = req.cookies.pID;
+            // const doctors = await this.getAvailableDoctors();
+            res.render("patient/newAppointment", { patientID: patientID });
         } catch (error) {
             console.log(error);
         }
     }
 
+    // // Fetch a vailable doctors
+    // async getAvailableDoctors() {
+    //     try {
+    //         const dId = req.cookies.dId;
+    //         const doctors = await db.query(
+    //             `SELECT * FROM doctors WHERE dId NOT IN (SELECT dId=${dId} FROM appointments)`
+    //         );
+    //         return doctors;
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
     // [POST] /patient/newAppointment:id
     async createNewAppointmentPost(req, res) {
         const newAppointment = {
             dId: req.body.dId,
-            pId: req.cookies.p_ID,
-            date: req.body.date,
-            time: req.body.time,
+            pId: req.cookies.pId,
+            meetDate: req.body.meetDate,
+            meetTime: req.body.meetTime,
         };
         try {
             await db.query(
@@ -61,18 +77,6 @@ class PatientController {
         }
     }
 
-    // Fetch a vailable doctors
-    async getAvailableDoctors() {
-        try {
-            const d_ID = req.cookies.d_ID;
-            const doctors = await db.query(
-                `SELECT * FROM user WHERE role = 'doctor' AND id NOT IN (SELECT dId=${d_ID} FROM appointments)`
-            );
-            return doctors;
-        } catch (error) {
-            console.log(error);
-        }
-    }
     // [GET] /patitent/details/:id
     async getPatientDetails(req, res) {
         const patientId = req.cookies.pId;
@@ -96,7 +100,7 @@ class PatientController {
         try {
             const patientId = req.cookies.pId;
             await db.query(
-                `SELECT * FROM user WHERE role = 'patient' AND id=${patientId}`,
+                `SELECT * FROM patients WHERE pId=${patientId}`,
                 (err, result) => {
                     if (err) throw err;
 
@@ -109,7 +113,7 @@ class PatientController {
         }
     }
 
-    // POST /patient/edit/:id
+    // [PATCH] /patient/edit/:id
     async editPatientInfo(req, res) {
         const { name, age, address, phoneNumber, insuranceNumber, password } =
             req.body;
@@ -117,7 +121,7 @@ class PatientController {
 
         try {
             await db.query(
-                "UPDATE user SET name = ?, age = ?, address = ?, phoneNumber = ?, insuranceNumber = ?, password = ? WHERE id = ?",
+                `UPDATE patients SET name = ?, age = ?, address = ?, phoneNumber = ?, insuranceNumber = ?, password = ? WHERE id = ?`,
                 [name, age, address, phoneNumber, insuranceNumber, password, patientId],
                 (err, result) => {
                     if (err) throw err;

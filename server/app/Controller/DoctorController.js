@@ -11,11 +11,11 @@ const db = (connect = mysql.createConnection({
 class DoctorController {
     //[GET] /doctor/patient_list
     async getAllPatients(req, res) {
-        const d_Id = req.cookies.d_ID;
+        const dId = req.cookies.dId;
         // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
         try {
             await db.query(
-                `SELECT *  FROM inchargeof  WHERE dId=${d_Id}`,
+                `SELECT *  FROM inchargeof  WHERE dId=${dId}`,
                 (err, result) => {
                     if (err) {
                         throw err;
@@ -32,7 +32,7 @@ class DoctorController {
     //[GET] /doctor/ getAllAppointments
     async getAllAppointment(req, res) {
         try {
-            const dId = req.cookies.d_ID;
+            const dId = req.cookies.dId;
             await db.query(
                 `SELECT name, date, time FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`,
                 (err, result) => {
@@ -49,13 +49,13 @@ class DoctorController {
     //[GET] /doctor/inChargeForm/:id
     async inChargeForm(req, result) {
         try {
-            const d_ID = req.cookies.d_ID;
+            const dId = req.cookies.dId;
             await db.query(
                 `SELECT name,age,pId FROM patients WHERE patients.pId= ${req.params.id}`,
                 (err, res) => {
                     result
                         .status(200)
-                        .render("doctor/inChargeForm", { patient: res, d_ID: d_ID });
+                        .render("doctor/inChargeForm", { patient: res, dId: dId });
                 }
             );
         } catch (e) {
@@ -70,10 +70,12 @@ class DoctorController {
             dId: req.cookies.dId,
             pName: req.body.pName,
             details: req.body.details,
-            startDate: req.body.startDate,
+            startDay: req.body.startDay,
         };
         try {
-            await db.query(`INSERT INTO inchargeof SET ? `, newCharge, (err, res) => {
+            await db.query(
+                `INSERT INTO inchargeof SET ? `,
+                newCharge, (err, res) => {
                 if (err) {
                     console.log(err);
                     throw err;
