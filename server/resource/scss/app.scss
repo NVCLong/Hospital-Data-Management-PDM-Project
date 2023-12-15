@@ -29,15 +29,13 @@ body {
   }
 
 
-  ul {
+  ul  {
     margin-bottom: auto;
     list-style: none;
 
 
     li {
-
-      .nav_icon,
-      a {
+      .nav_icon, a {
         display: flex;
         align-items: center;
         padding: 0.5rem 2rem 0.5rem 1rem;
@@ -54,11 +52,10 @@ body {
         }
       }
 
-      &.active>a,
-      .nav_icon {
+      &.active >a, .nav_icon {
         background: linear-gradient(to right, #101b2d, transparent);
 
-        &::before {
+        &::before  {
           content: "";
           position: absolute;
           left: 0;
@@ -182,14 +179,11 @@ main {
 }
 
 .nav-tabs {
-
-  ul,
-  li {
+  ul, li {
     margin: 0;
     padding: 0;
     list-style: none;
   }
-
   a {
     margin-right: 2rem;
     display: inline-block;

@@ -31,8 +31,7 @@ body {
   margin-bottom: auto;
   list-style: none;
 }
-.site-nav ul li .nav_icon,
-.site-nav ul li a {
+.site-nav ul li .nav_icon, .site-nav ul li a {
   display: flex;
   align-items: center;
   padding: 0.5rem 2rem 0.5rem 1rem;
@@ -41,17 +40,13 @@ body {
   text-decoration: none;
   line-height: 100%;
 }
-.site-nav ul li .nav_icon:hover, .site-nav ul li .nav_icon:focus,
-.site-nav ul li a:hover,
-.site-nav ul li a:focus {
+.site-nav ul li .nav_icon:hover, .site-nav ul li .nav_icon:focus, .site-nav ul li a:hover, .site-nav ul li a:focus {
   color: #4371c5;
 }
-.site-nav ul li.active > a,
-.site-nav ul li .nav_icon {
+.site-nav ul li.active > a, .site-nav ul li .nav_icon {
   background: linear-gradient(to right, #101b2d, transparent);
 }
-.site-nav ul li.active > a::before,
-.site-nav ul li .nav_icon::before {
+.site-nav ul li.active > a::before, .site-nav ul li .nav_icon::before {
   content: "";
   position: absolute;
   left: 0;
@@ -157,8 +152,7 @@ main > header {
   margin: 0 0 0.5rem 0;
 }
 
-.nav-tabs ul,
-.nav-tabs li {
+.nav-tabs ul, .nav-tabs li {
   margin: 0;
   padding: 0;
   list-style: none;

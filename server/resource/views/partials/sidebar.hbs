@@ -1,50 +1,143 @@
-<nav class="site-nav">
-    <div class="name">Dashboard</div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link id="theme" rel="stylesheet" href="../dashboard/dashboard.css" />
+        <script src="https://kit.fontawesome.com/dee05b2660.js" crossorigin="anonymous"></script>
 
-    <ul>
-        <li class="active">
-            <div class="nav_icon">
-                <i class="fa-solid fa-bed-pulse"></i>
-                <a href="#">Patients</a>
-            </div>
-            <ul class="sub_nav">
-                <li>
-                    <div class="nav_icon">
-                        <i class="fa-solid fa-calendar-check"></i>
-                        <a href="#">Book online</a>
+        <title></title>
+    </head>
+    <body>
+        <div class="site-wrap">
+            <nav class="site-nav">
+                <div class="name">Dashboard</div>
+
+                <ul>
+                    <li class="active">
+                        <div class="nav_icon">
+                            <i class="fa-solid fa-bed-pulse"></i>
+                            <a href="#">Patients</a>
+                        </div>
+                        <ul class="sub_nav">
+                            <li>
+                                <div class="nav_icon">
+                                    <i class="fa-solid fa-calendar-check"></i>
+                                    <a href="#">Book online</a>
+                                </div>
+
+                                <div class="nav_icon">
+                                    <i class="fa-solid fa-calendar-check"></i>
+                                    <a href="#">Scheduled appointment</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="nav_icon">
+                            <i class="fa-solid fa-user-doctor"></i>
+                            <a href="#">Doctors</a>
+                        </div>
+                        <ul class="sub_nav">
+                            <li>
+                                <div class="nav_icon">
+                                    <i class="fa-brands fa-wpforms"></i>
+                                    <a href="#">In charge form</a>
+                                </div>
+
+                                <div class="nav_icon">
+                                    <i class="fa-solid fa-users"></i>
+                                    <a href="#">Patients managed</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+                <div class="note">
+                    <h3>PDM Project</h3>
+                    <p>Hospital Data Management</p>
+                </div>
+            </nav>
+
+            <main>
+                <header>
+                    <div class="breadcrumbs">
+                        <i class="fa-solid fa-home"></i>
+                        <a href="#0/">Home</a>
                     </div>
 
-                    <div class="nav_icon">
-                        <i class="fa-solid fa-calendar-check"></i>
-                        <a href="#">Scheduled appointment</a>
-                    </div>
-                </li>
-            </ul>
-        </li>
+                    <h1 class="title">Patients</h1>
 
-        <li>
-            <div class="nav_icon">
-                <i class="fa-solid fa-user-doctor"></i>
-                <a href="#">Doctors</a>
-            </div>
-            <ul class="sub_nav">
-                <li>
-                    <div class="nav_icon">
-                        <i class="fa-brands fa-wpforms"></i>
-                        <a href="#">In charge form</a>
-                    </div>
+                    <nav class="nav-tabs" id="nav-tabs">
+                        <a href="#0" class="active">
+                            Today
+                            <span>14</span>
+                        </a>
+                        <a href="#0">
+                            Pending
+                            <span>24</span>
+                        </a>
+                    </nav>
+                </header>
 
-                    <div class="nav_icon">
-                        <i class="fa-solid fa-users"></i>
-                        <a href="#">Patients managed</a>
+                <div class="content-columns">
+                    <div class="col">
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
                     </div>
-                </li>
-            </ul>
-        </li>
-    </ul>
+                    <div class="col">
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                    </div>
+                    <div class="col">
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                    </div>
+                    <div class="col">
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                        <div class="item"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
 
-    <div class="note">
-        <h3>PDM Project</h3>
-        <p>Hospital Data Management</p>
-    </div>
-</nav>
+        <script>
+            const navTabs = document.querySelectorAll("#nav-tabs > a");
+            navTabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                    navTabs.forEach((tab) => {
+                        tab.classList.remove("active");
+                    });
+                    tab.classList.add("active");
+                });
+            });
+        </script>
+    </body>
+</html>
