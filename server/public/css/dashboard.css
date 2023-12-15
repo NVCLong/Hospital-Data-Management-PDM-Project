@@ -1,0 +1,199 @@
+* {
+  font-family: "SF Pro Display", sans-serif;
+}
+
+body {
+  background: url(/images/login_register_BG.png) no-repeat center;
+  background-size: cover;
+  padding: 3rem 0 0 3rem;
+  font-size: 12px;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.site-wrap {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+.site-nav {
+  background: #0b121b;
+  color: white;
+  border-top-left-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.site-nav a {
+  color: inherit;
+}
+.site-nav ul {
+  margin-bottom: auto;
+  list-style: none;
+}
+.site-nav ul li .nav_icon, .site-nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  position: relative;
+  font-size: medium;
+  text-decoration: none;
+  line-height: 100%;
+}
+.site-nav ul li .nav_icon:hover, .site-nav ul li .nav_icon:focus, .site-nav ul li a:hover, .site-nav ul li a:focus {
+  color: #4371c5;
+}
+.site-nav ul li.active > a, .site-nav ul li .nav_icon {
+  background: linear-gradient(to right, #101b2d, transparent);
+}
+.site-nav ul li.active > a::before, .site-nav ul li .nav_icon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #4676cd;
+  width: 5px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.site-nav ul ul .nav_icon {
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+.site-nav ul ul .nav_icon a {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+.note {
+  width: calc(100% - 6rem);
+  margin: 2rem;
+  background: #171c26;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.note h3 {
+  font-size: 0.9rem;
+  margin: 0 0 0.4rem 0;
+}
+.note p {
+  color: #717783;
+}
+
+.name {
+  font-size: 1.3rem;
+  position: relative;
+  margin: 2rem 0 2rem 0;
+  padding: 0 2.5rem 0.5rem 2rem;
+  width: calc(100% - 3rem);
+  /* svg {
+    position: absolute;
+    fill: white;
+    width: 16px;
+    height: 16px;
+    right: 0;
+    top: 7px;
+  } */
+}
+.name::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #4777ce;
+  border-radius: 20px;
+  position: absolute;
+  top: 6px;
+  right: -2px;
+}
+
+main {
+  border-top-left-radius: 2rem;
+  background: #ebecee;
+  margin-left: -2rem;
+  position: relative;
+}
+main > header {
+  padding: 3rem 3rem 0 3rem;
+}
+
+.content-columns {
+  padding: 3rem;
+  display: flex;
+  background: #e5e5e9;
+}
+.content-columns .col {
+  min-height: 500px;
+  width: 200px;
+  padding: 1rem;
+  background: #ebecee;
+  margin-right: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+}
+.content-columns .col:nth-child(1) {
+  border-top: 4px solid #50aaee;
+}
+.content-columns .col:nth-child(2) {
+  border-top: 4px solid #d56ec7;
+}
+.content-columns .col:nth-child(3) {
+  border-top: 4px solid #e37e55;
+}
+.content-columns .col:nth-child(4) {
+  border-top: 4px solid #ebbd41;
+}
+
+.item {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+  min-height: 50px;
+  border-radius: 5px;
+  margin: 0 0 0.5rem 0;
+}
+
+.nav-tabs ul, .nav-tabs li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav-tabs a {
+  margin-right: 2rem;
+  display: inline-block;
+  padding: 1rem 0 1rem 0;
+  font-size: 1.15rem;
+  color: #8c939e;
+  position: relative;
+  text-decoration: none;
+}
+.nav-tabs a.active {
+  color: #101620;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.nav-tabs a.active span {
+  background: #d9dfea;
+  color: #5887d1;
+}
+.nav-tabs a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #457ace;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.nav-tabs a span {
+  border-radius: 10px;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.4rem;
+  font-weight: 600;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  background: #dfe0e2;
+  color: #868d99;
+}

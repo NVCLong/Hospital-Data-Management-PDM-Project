@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package-v2.json",
   "name": "hospital-data-management-pdm-project",
   "version": "1.0.0",
   "description": "",
@@ -6,7 +7,10 @@
   "scripts": {
     "start": "nodemon --inspect server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "sass --no-source-map --watch server/resource/scss/app.scss server/public/css/app.css"
+    "watch": "sass --no-source-map --watch server/resource/scss/dashboard.scss  /server/public/css/dashboard.css",
+    "convert": "sass --no-source-map --watch server/resource/scss/doctor_login_register.scss  /server/public/css/doctor_login_register.css",
+    "convert1": "sass --no-source-map --watch server/resource/scss/login_register.scss  /server/public/css/login_register.css",
+    "all": "concurrently \"npm run watch\" \"npm run convert\" \"npm run convert1\""
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +25,10 @@
     "nodemon": "^3.0.2"
   },
   "dependencies": {
+    "concurrently": "^8.2.2",
     "express-handlebars": "^7.1.2",
-    "sass": "^1.69.5",
-    "node-sass": "^9.0.0"
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.69.5"
   }
 }
