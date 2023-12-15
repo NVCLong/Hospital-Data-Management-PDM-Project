@@ -1,6 +1,6 @@
 const mysql = require("mysql");
-const sqlObject= require("../../untils/Sql")
-const {multipleSQLToObject, SQLToObject} = require("../../untils/Sql");
+const sqlObject = require("../../untils/Sql");
+const { multipleSQLToObject, SQLToObject } = require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -11,93 +11,114 @@ const db = (connect = mysql.createConnection({
 class DoctorController {
     //[GET] /doctor/patient_list
     async getAllPatients(req, res) {
-        const d_Id= req.cookies.d_ID;
+        const dId = req.cookies.dId;
         // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
         try {
-            await db.query(`SELECT *  FROM inchargeof  WHERE dId=${d_Id}`,(err, result) => {
-                if (err) { throw err; }
-                console.log(typeof  result)
-                res.render('doctor/patient_list',{patients: result})
-            });
+            await db.query(
+                `SELECT *  FROM inchargeof  WHERE dId=${dId}`,
+                (err, result) => {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log(typeof result);
+                    res.render("doctor/patient_list", { patients: result });
+                }
+            );
         } catch (error) {
             console.log(error);
         }
     }
 
     //[GET] /doctor/ getAllAppointments
-    async getAllAppointment(req, res){
+    async getAllAppointment(req, res) {
         try {
-            const dId=req.cookies.d_ID;
-            await db.query(`SELECT name, date, time FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`,(err,result)=>{
-                res.render("doctor/appointmentList",{appointment: multipleSQLToObject(result)});
-            } );
-        }catch (error) {
+            const dId = req.cookies.dId;
+            await db.query(
+                `SELECT name, date, time FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`,
+                (err, result) => {
+                    res.render("doctor/appointmentList", {
+                        appointment: multipleSQLToObject(result),
+                    });
+                }
+            );
+        } catch (error) {
             console.log(error);
         }
     }
 
     //[GET] /doctor/inChargeForm/:id
-    async  inChargeForm(req, result) {
+    async inChargeForm(req, result) {
         try {
-            const d_ID= req.cookies.d_ID
-          await  db.query(`SELECT name,age,pId FROM patients WHERE patients.pId= ${req.params.id}`, (err, res) => {
-                result.status(200).render('doctor/inChargeForm', {patient: res, d_ID: d_ID});
-            })
-        }catch (e) {
+            const dId = req.cookies.dId;
+            await db.query(
+                `SELECT name,age,pId FROM patients WHERE patients.pId= ${req.params.id}`,
+                (err, res) => {
+                    result
+                        .status(200)
+                        .render("doctor/inChargeForm", { patient: res, dId: dId });
+                }
+            );
+        } catch (e) {
             console.log(e);
         }
     }
 
     //[POST] /doctor/inChargeForm/:id
     async inChargeFormPost(req, res) {
-        const newCharge={
-            pId:req.body.pId,
+        const newCharge = {
+            pId: req.body.pId,
             dId: req.cookies.dId,
             pName: req.body.pName,
             details: req.body.details,
-            startDate: req.body.startDate
-        }
+            startDay: req.body.startDay,
+        };
         try {
-            await db.query(`INSERT INTO inchargeof SET ? `,newCharge, (err, res)=>{
-
-                 if(err){
-                     console.log(err)
-                     throw err;
-                 }
-            })
+            await db.query(
+                `INSERT INTO inchargeof SET ? `,
+                newCharge, (err, res) => {
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+            });
             res.redirect("/doctor/patientList");
-        }catch (e) {
+        } catch (e) {
             console.log(e);
         }
     }
 
-    //GET]  /doctor/updateInchargeDetails/:id
-    async updateForm(req,res){
-        try{
-            await db.query(`SELECT details FROM inchargef WHERE inchargeof.pId= ${req.params.id}`, (err, res)=>{
-                if(err){
-                    console.log(err)
-                    throw err;
+    //[GET]  /doctor/updateInchargeDetails/:id
+    async updateForm(req, res) {
+        try {
+            await db.query(
+                `SELECT details FROM inchargef WHERE inchargeof.pId= ${req.params.id}`,
+                (err, res) => {
+                    if (err) {
+                        console.log(err);
+                        throw err;
+                    }
+                    res.render("doctor/updateInchargeDetails", { details: res });
                 }
-                res.render("doctor/updateInchargeDetails",{details:res})
-            })
-        }catch (e) {
+            );
+        } catch (e) {
             console.log(e);
         }
     }
     //[PATCH] /doctor/updateForm/:id
-    async updateDetail(req,res){
-        try{
-            const details = req.body.details
-            await db.query(`Update inchargeof SET inchargeof.details=${details} WHERE inchargeof.pId=${req.params.id} , inchargeof.dId=${req.cookies.dId}`,(err, res)=>{
-                if (err){
-                    console.log(err)
-                    throw err
+    async updateDetail(req, res) {
+        try {
+            await db.query(
+                `Update inchargeof SET inchargeof.details=${details} WHERE inchargeof.pId=${req.params.id} , inchargeof.dId=${req.cookies.dId}`,
+                (err, res) => {
+                    if (err) {
+                        console.log(err);
+                        throw err;
+                    }
+                    res.redirect("doctor/patient_list");
                 }
-                res.redirect('doctor/patient_list')
-            })
-        }catch (e) {
-            console.log(e)
+            );
+        } catch (e) {
+            console.log(e);
         }
     }
 }
