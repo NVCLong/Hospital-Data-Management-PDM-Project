@@ -4,7 +4,7 @@ const { multipleSQLToObject, SQLToObject } = require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "12345",
+    password: "",
     port: 3306,
     database: "test",
 }));
@@ -105,7 +105,6 @@ class DoctorController {
     //[PATCH] /doctor/updateForm/:id
     async updateDetail(req, res) {
         try {
-            const details = req.body.details;
             await db.query(
                 `Update inchargeof SET inchargeof.details=${details} WHERE inchargeof.pId=${req.params.id} , inchargeof.dId=${req.cookies.dId}`,
                 (err, res) => {

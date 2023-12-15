@@ -3,7 +3,7 @@ const { multipleSQLToObject, SQLToObject } = require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "password123",
+    password: "",
     port: 3306,
     database: "test",
 }));
@@ -75,14 +75,15 @@ class PatientController {
     }
     // [GET] /patitent/details/:id
     async getPatientDetails(req, res) {
-        const patientId = req.params.id;
+        const patientId = req.cookies.pId;
         try {
             await db.query(
-                `SELECT * FROM user WHERE role = 'patient' AND id=${patientId}`,
+                `SELECT * FROM patients WHERE pId= ${patientId}`,
                 (err, result) => {
                     if (err) {
                         throw err;
                     }
+                    console.log(result);
                     res.render("patient/details", { patients: result });
                 }
             );
@@ -93,14 +94,14 @@ class PatientController {
     // GET /patient/edit/:id
     async editPatientForm(req, res) {
         try {
-            const patientId = req.params.id;
+            const patientId = req.cookies.pId;
             await db.query(
                 `SELECT * FROM user WHERE role = 'patient' AND id=${patientId}`,
                 (err, result) => {
                     if (err) throw err;
 
-                    const patient = SQLToObject(result);
-                    res.render("patient/editInfo", { user: patient });
+                    // const patient = SQLToObject(result);
+                    res.render("patient/editInfo", { user: result });
                 }
             );
         } catch (error) {

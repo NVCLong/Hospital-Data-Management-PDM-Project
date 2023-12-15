@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 30, 2023 lúc 08:35 AM
+-- Thời gian đã tạo: Th12 15, 2023 lúc 02:40 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -28,22 +28,46 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `appointments` (
-  `d_ID` int(11) NOT NULL,
-  `p_ID` int(11) NOT NULL,
-  `time` time NOT NULL,
-  `date` date NOT NULL
+  `dId` int(11) NOT NULL,
+  `pId` int(11) NOT NULL,
+  `meetDate` date NOT NULL,
+  `meetTime` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `appointments`
+--
+
+INSERT INTO `appointments` (`dId`, `pId`, `meetDate`, `meetTime`) VALUES
+(1, 2, '2023-12-08', '10:00:00'),
+(2, 3, '2023-12-09', '11:00:00'),
+(3, 7, '2023-12-10', '12:00:00'),
+(4, 6, '2023-12-13', '11:00:00'),
+(5, 1, '2024-01-10', '12:00:00'),
+(5, 4, '2023-12-11', '13:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `contains`
+-- Cấu trúc bảng cho bảng `contain`
 --
 
-CREATE TABLE `contains` (
-  `dept_ID` int(100) NOT NULL,
-  `p_ID` int(100) NOT NULL
+CREATE TABLE `contain` (
+  `deptId` int(11) NOT NULL,
+  `pId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contain`
+--
+
+INSERT INTO `contain` (`deptId`, `pId`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(2, 4),
+(1, 5),
+(3, 6);
 
 -- --------------------------------------------------------
 
@@ -52,10 +76,20 @@ CREATE TABLE `contains` (
 --
 
 CREATE TABLE `departments` (
-  `dept_ID` int(100) NOT NULL,
-  `dept_Name` varchar(100) NOT NULL,
-  `dept_code` int(100) NOT NULL
+  `deptId` int(11) NOT NULL,
+  `deptName` varchar(255) NOT NULL,
+  `numberOfDoctor` int(11) NOT NULL DEFAULT 0,
+  `deptCode` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `departments`
+--
+
+INSERT INTO `departments` (`deptId`, `deptName`, `numberOfDoctor`, `deptCode`) VALUES
+(1, 'General Medicine', 1, 1),
+(2, 'Pediatrics', 2, 2),
+(3, 'Dermatology', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -64,98 +98,91 @@ CREATE TABLE `departments` (
 --
 
 CREATE TABLE `doctors` (
-  `doctor_ID` int(100) NOT NULL,
-  `dept_ID` int(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` bigint(20) NOT NULL,
-  `position` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `role` varchar(100) NOT NULL
+  `dId` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `position` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `deptCode` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `doctors`
+--
+
+INSERT INTO `doctors` (`dId`, `name`, `email`, `phone`, `position`, `password`, `deptCode`) VALUES
+(1, 'Nguyen Van An', 'nguyenvanan@gmail.com', '0912345678', 'General Practitioner', '$2a$10$mO6.PDuOVS/NT231wwFPzunpPI1TwKT8QvLshYI1xVoI.XgNAOl0e', 1),
+(2, 'Tran Thi Binh', 'tranthibinh@gmail.com', '0923456789', 'Pediatrician', '$2a$10$mO6.PDuOVS/NT231wwFPzunpPI1TwKT8QvLshYI1xVoI.XgNAOl0e', 2),
+(3, 'Le Van Cuong', 'levancuong@gmail.com', '0934567890', 'Dermatologist', '$2a$10$mO6.PDuOVS/NT231wwFPzunpPI1TwKT8QvLshYI1xVoI.XgNAOl0e', 3),
+(4, 'Pham My Dung', 'phammydung@gmail.com', '0945678901', 'Pediatrician', '$2a$10$mO6.PDuOVS/NT231wwFPzunpPI1TwKT8QvLshYI1xVoI.XgNAOl0e', 2),
+(5, 'Vo Van Long', 'vovanlong@gmail.com', '0956789012', 'Dermatologist', '$2a$10$mO6.PDuOVS/NT231wwFPzunpPI1TwKT8QvLshYI1xVoI.XgNAOl0e', 3);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `incharge`
+-- Cấu trúc bảng cho bảng `inchargeof`
 --
 
-CREATE TABLE `incharge` (
-  `p_ID` int(100) NOT NULL,
-  `d_ID` int(100) NOT NULL,
-  `startDay` int(100) NOT NULL
+CREATE TABLE `inchargeof` (
+  `startDay` date NOT NULL,
+  `dId` int(11) NOT NULL,
+  `pId` int(11) NOT NULL,
+  `pName` varchar(255) NOT NULL,
+  `details` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `inchargeof`
+--
+
+INSERT INTO `inchargeof` (`startDay`, `dId`, `pId`, `pName`, `details`) VALUES
+('2023-12-08', 1, 1, 'Vo Van Xuan', 'Benh dai'),
+('2023-12-09', 2, 2, 'Nguyen Thi Quynh', 'Dau dau'),
+('2023-12-10', 3, 3, 'Tran Dinh Hau', 'Dang on'),
+('2023-12-13', 4, 4, 'Tran Dinh Hau', 'Nguy kich'),
+('2023-12-11', 5, 5, 'Tran Thi Kim Loan', 'Tien trien tot'),
+('2024-01-10', 3, 6, 'Hoang The Em', 'Xuat vien');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `jokes_table`
+-- Cấu trúc bảng cho bảng `patients`
 --
 
-CREATE TABLE `jokes_table` (
-  `JokeID` int(11) NOT NULL,
-  `Joke_quest` varchar(500) DEFAULT NULL,
-  `Joke_answer` varchar(500) DEFAULT NULL
+CREATE TABLE `patients` (
+  `pId` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phoneNumber` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `jokes_table`
+-- Đang đổ dữ liệu cho bảng `patients`
 --
 
-INSERT INTO `jokes_table` (`JokeID`, `Joke_quest`, `Joke_answer`) VALUES
-(29, '..', '..'),
-(42, '.Anh thay gi trong doi mat em.', '.hinh bong cua anh.'),
-(43, '.Sao em dep the.', '.Boi vi em la ny anh.'),
-(59, '.Tai sao anh lai yeu em.', '.Boi vi em yeu anh.'),
-(63, '.Tai sao em lai yeu anh den the.', '.Boi vi anh khong yeu em ma.'),
-(62, '.Tai sao em lai yeu anh.', '.Boi vi anh khong yeu em.'),
-(21, '.Tamu dep trai khong?.', '.Dep trai chu.'),
-(25, '.Tamu dep trai nhat the gioi k?.', '.Qua dep trai luon ay chu.'),
-(28, '.Thay t hai huoc k.', '.Ko.'),
-(40, '.troi hom nay co dep khong.', '.Sao dep bang em dc.'),
-(6, 'How do you catch a squirrel?', 'Climb a tree and act like a nut!'),
-(11, 'How do you make a tissue dance?', 'You put a little boogie in it!'),
-(3, 'How do you organize a space party?', 'You planet!'),
-(5, 'What did one wall say to the other wall?', 'I\'ll meet you at the corner!'),
-(8, 'What did the big flower say to the little flower?', 'Hi, bud!'),
-(2, 'What did the ocean say to the beach?', 'Nothing, it just waved!'),
-(12, 'What do you call a fake noodle?', 'An impasta!'),
-(20, 'What do you call a fish with no eyes?', 'Fsh!'),
-(15, 'What do you call a snowman with a six-pack?', 'An abdominal snowman!'),
-(18, 'What do you get if you cross a snowman and a vampire?', 'Frostbite!'),
-(17, 'What kind of shoes do ninjas wear?', 'Sneakers!'),
-(9, 'Why did the bicycle fall over?', 'Because it was two-tired!'),
-(19, 'Why did the chicken go to the seance?', 'To talk to the other side!'),
-(13, 'Why did the scarecrow win an award?', 'Because he was outstanding in his field!'),
-(16, 'Why did the tomato turn red?', 'Because it saw the salad dressing!'),
-(7, 'Why don\'t eggs tell jokes?', 'Because they might crack up!'),
-(1, 'Why don\'t scientists trust atoms?', 'Because they make up everything!'),
-(4, 'Why don\'t skeletons fight each other?', 'They don\'t have the guts!'),
-(14, 'Why was the math book sad?', 'Because it had too many problems!');
+INSERT INTO `patients` (`pId`, `name`, `email`, `password`, `address`, `phoneNumber`, `role`) VALUES
+(1, 'Vo Van Xuan', 'vovanxuan@gmail.com', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '166/24 Dang Va Bi, Binh Tho, Thu Duc, HCMC', '0944567890', 'Patient'),
+(2, 'Nguyen Thi Quynh', 'nguyenthiquynh@gmail.com', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '185 Nguyen Du, Dong Hoa, Di An, Binh Duong', '0978253614', 'Patient'),
+(3, 'Tran Dinh Hau', 'trandinhhau@gmail.com', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '48/01 Xuan Thuy, Thao Dien, Thu Duc, HCMC', '0461952837', 'Patient'),
+(4, 'Tran Dinh Hau', 'trandinhhau@gmail.comm', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '561A Dien Bien Phu, Ward 25, Binh Thanh, HCMC', '0638912547', 'Patient'),
+(5, 'Tran Thi Kim Loan', 'tranthikimloan@gmail.com', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '2 Nguyen Binh Khiem, Ben Nghe Ward, Distric 1, HCMC', '0194538267', 'Patient'),
+(6, 'Hoang The Em', 'hoangem@gmail.com', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '485 An Duong Vuong, Ward 8, Distric 5, HCMC', '0951628374', 'Patient'),
+(7, 'Nguyen Thi Ha', 'nguyenha@gmail.com', '$2a$10$S7zpqbbO9CYxwJrTbYoxTO3kte5dD/FieMvjo0EcFhDnFmAY8SyCa', '12 Street 10, Tan Kien Ward, Distric 7, HCMC', '0936542871', 'Patient');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Cấu trúc bảng cho bảng `work`
 --
 
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `age` int(11) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `phoneNumber` bigint(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `insuranceNumber` bigint(20) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `role` varchar(50) NOT NULL
+CREATE TABLE `work` (
+  `dId` int(11) NOT NULL,
+  `deptId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Đang đổ dữ liệu cho bảng `user`
---
-
-INSERT INTO `user` (`id`, `name`, `age`, `address`, `phoneNumber`, `email`, `insuranceNumber`, `password`, `role`) VALUES
-(1, 'testuser1', 12, 'Ho Chi Minh', 987654321, 'testuser1@gmail.com', 1234, '$2b$10$9PueNVpS7RJMcQgYywv6VOH3scjC9zZBetepxO9g/W4isq54thsrm', 'patient');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -165,54 +192,87 @@ INSERT INTO `user` (`id`, `name`, `age`, `address`, `phoneNumber`, `email`, `ins
 -- Chỉ mục cho bảng `appointments`
 --
 ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`date`),
-  ADD UNIQUE KEY `time` (`time`);
+  ADD PRIMARY KEY (`dId`,`pId`,`meetDate`,`meetTime`),
+  ADD KEY `pId` (`pId`);
+
+--
+-- Chỉ mục cho bảng `contain`
+--
+ALTER TABLE `contain`
+  ADD KEY `deptId` (`deptId`),
+  ADD KEY `pId` (`pId`);
 
 --
 -- Chỉ mục cho bảng `departments`
 --
 ALTER TABLE `departments`
-  ADD PRIMARY KEY (`dept_ID`);
+  ADD PRIMARY KEY (`deptId`),
+  ADD UNIQUE KEY `deptCode` (`deptCode`);
 
 --
--- Chỉ mục cho bảng `jokes_table`
+-- Chỉ mục cho bảng `doctors`
 --
-ALTER TABLE `jokes_table`
-  ADD PRIMARY KEY (`JokeID`),
-  ADD UNIQUE KEY `JokeID` (`JokeID`),
-  ADD UNIQUE KEY `JokeID_2` (`JokeID`),
-  ADD UNIQUE KEY `Joke_answer_4` (`Joke_answer`),
-  ADD UNIQUE KEY `Joke_quest_3` (`Joke_quest`),
-  ADD UNIQUE KEY `Joke_quest_5` (`Joke_quest`,`Joke_answer`),
-  ADD KEY `Joke_answer_3` (`Joke_answer`),
-  ADD KEY `Joke_answer_5` (`Joke_answer`),
-  ADD KEY `Joke_quest_4` (`Joke_quest`);
-ALTER TABLE `jokes_table` ADD FULLTEXT KEY `Joke_quest` (`Joke_quest`);
-ALTER TABLE `jokes_table` ADD FULLTEXT KEY `Joke_answer` (`Joke_answer`);
-ALTER TABLE `jokes_table` ADD FULLTEXT KEY `Joke_quest_2` (`Joke_quest`);
-ALTER TABLE `jokes_table` ADD FULLTEXT KEY `Joke_answer_2` (`Joke_answer`);
+ALTER TABLE `doctors`
+  ADD PRIMARY KEY (`dId`),
+  ADD KEY `deptCode` (`deptCode`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Chỉ mục cho bảng `inchargeof`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `inchargeof`
+  ADD KEY `dId` (`dId`),
+  ADD KEY `pId` (`pId`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- Chỉ mục cho bảng `patients`
+--
+ALTER TABLE `patients`
+  ADD PRIMARY KEY (`pId`);
+
+--
+-- Chỉ mục cho bảng `work`
+--
+ALTER TABLE `work`
+  ADD KEY `dId` (`dId`),
+  ADD KEY `deptId` (`deptId`);
+
+--
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT cho bảng `jokes_table`
+-- Các ràng buộc cho bảng `appointments`
 --
-ALTER TABLE `jokes_table`
-  MODIFY `JokeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+ALTER TABLE `appointments`
+  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`dId`) REFERENCES `doctors` (`dId`),
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`pId`) REFERENCES `patients` (`pId`);
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- Các ràng buộc cho bảng `contain`
 --
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `contain`
+  ADD CONSTRAINT `contain_ibfk_1` FOREIGN KEY (`deptId`) REFERENCES `departments` (`deptId`),
+  ADD CONSTRAINT `contain_ibfk_2` FOREIGN KEY (`pId`) REFERENCES `patients` (`pId`);
+
+--
+-- Các ràng buộc cho bảng `doctors`
+--
+ALTER TABLE `doctors`
+  ADD CONSTRAINT `doctors_ibfk_1` FOREIGN KEY (`deptCode`) REFERENCES `departments` (`deptCode`);
+
+--
+-- Các ràng buộc cho bảng `inchargeof`
+--
+ALTER TABLE `inchargeof`
+  ADD CONSTRAINT `inchargeof_ibfk_1` FOREIGN KEY (`dId`) REFERENCES `doctors` (`dId`),
+  ADD CONSTRAINT `inchargeof_ibfk_2` FOREIGN KEY (`pId`) REFERENCES `patients` (`pId`);
+
+--
+-- Các ràng buộc cho bảng `work`
+--
+ALTER TABLE `work`
+  ADD CONSTRAINT `work_ibfk_1` FOREIGN KEY (`dId`) REFERENCES `doctors` (`dId`),
+  ADD CONSTRAINT `work_ibfk_2` FOREIGN KEY (`deptId`) REFERENCES `departments` (`deptId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
