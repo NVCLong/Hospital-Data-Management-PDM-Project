@@ -7,3 +7,4 @@ navTabs.forEach((tab) => {
     tab.classList.add("active");
   });
 });
+-

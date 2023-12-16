@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url(/images/login_register_BG.png) no-repeat center;
+  background: url(../src/images/login_register_BG.png) no-repeat center;
   background-size: cover;
   padding: 3rem 0 0 3rem;
   font-size: 12px;

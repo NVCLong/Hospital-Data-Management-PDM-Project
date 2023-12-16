@@ -1,0 +1,48 @@
+<div class="site-wrap">
+      <nav class="site-nav">
+        <div class="name">Dashboard</div>
+
+        <ul>
+          <li class="active">
+            <div class="nav_icon">
+              <i class="fa-solid fa-bed-pulse"></i>
+              <a href="/authentication/">Patients</a>
+            </div>
+          </li>
+
+          <li>
+            <div class="nav_icon">
+              <i class="fa-solid fa-user-doctor"></i>
+              <a href="/authentication/doctor/loginForm">Doctors</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="note">
+          <h3>PDM Project</h3>
+          <p>Hospital Data Management</p>
+        </div>
+      </nav>
+
+      <main>
+        <div class="logo_main">
+            <img src="../src/images/PDM_logo.png" class="logo" width="500" height="500">
+        </div>
+        <div class="text_main">
+            <h1>WELCOME TO PDM</h1>
+            <p>Click on the left side menu to get your role</p>
+        </div>
+
+      </main>
+</div>
+<script>
+        const navTabs = document.querySelectorAll("#nav-tabs > a");
+        navTabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                navTabs.forEach((tab) => {
+                    tab.classList.remove("active");
+                });
+                tab.classList.add("active");
+            });
+        });
+</script>

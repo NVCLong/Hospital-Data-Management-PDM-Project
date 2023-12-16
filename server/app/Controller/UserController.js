@@ -184,7 +184,7 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         } )
-                        res.render("home",{patient: patient})
+                        res.render("dashboard",{patient: patient})
                     }
                 }
             );
@@ -221,7 +221,7 @@ class UserController {
                 }
             );
             UserController.id++;
-            res.json({ msg: "success" });
+            res.redirect("/");
 
         } catch (e) {
             console.log(e);
