@@ -273,7 +273,7 @@ class UserController {
         res.clearCookie("accessToken");
         res.clearCookie("refreshToken");
         res.clearCookie("pId")
-        res.clearCookie("dId")
+        res.clearCookie("d_Id")
         res.redirect("/");
     }
 }
