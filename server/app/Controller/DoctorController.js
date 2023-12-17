@@ -40,7 +40,12 @@ class DoctorController {
     async  inChargeForm(req, result) {
         try {
             const d_ID= req.cookies.d_ID
-          await  db.query(`SELECT name,age,pId FROM patients WHERE patients.pId= ${req.params.id}`, (err, res) => {
+            console.log(typeof req.params.id)
+            await  db.query(`SELECT name,pId, phoneNumber FROM patients WHERE patients.pId=${req.params.id}`, (err, res) => {
+                if (err) {
+                    console.log(err)
+                }
+                console.log(res);
                 result.status(200).render('doctor/inChargeForm', {patient: res, d_ID: d_ID});
             })
         }catch (e) {
@@ -74,12 +79,12 @@ class DoctorController {
     //GET]  /doctor/updateInchargeDetails/:id
     async updateForm(req,res){
         try{
-            await db.query(`SELECT details FROM inchargef WHERE inchargeof.pId= ${req.params.id}`, (err, res)=>{
+            await db.query(`SELECT details FROM inchargeof WHERE inchargeof.pId= ${req.params.id}`, (err, result)=>{
                 if(err){
                     console.log(err)
                     throw err;
                 }
-                res.render("doctor/updateInchargeDetails",{details:res})
+                res.render("doctor/updateInchargeDetails",{details:result})
             })
         }catch (e) {
             console.log(e);
@@ -89,12 +94,13 @@ class DoctorController {
     async updateDetail(req,res){
         try{
             const details = req.body.details
-            await db.query(`Update inchargeof SET inchargeof.details=${details} WHERE inchargeof.pId=${req.params.id} , inchargeof.dId=${req.cookies.dId}`,(err, res)=>{
+            const dId=req.cookies.d_ID;
+            await db.query(`Update inchargeof SET inchargeof.details="${details}" WHERE inchargeof.pId=${req.params.id} AND inchargeof.dId=${dId}`,(err, result)=>{
                 if (err){
                     console.log(err)
                     throw err
                 }
-                res.redirect('doctor/patient_list')
+                res.redirect('/doctor/patient_list')
             })
         }catch (e) {
             console.log(e)

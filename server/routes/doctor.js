@@ -7,7 +7,7 @@ route.get("/patient_list", doctorControler.getAllPatients);
 route.get("/getAllAppointments", doctorControler.getAllAppointment);
 route.get("/inchargeForm/:id", doctorControler.inChargeForm);
 route.post("/inchargeForm/:id",doctorControler.inChargeFormPost);
-route.get("/inchargeForm/:id",doctorControler.updateForm)
-route.patch("/inchargeForm/:id",doctorControler.updateDetail)
+route.get("/updateInchargeForm/:id",doctorControler.updateForm)
+route.patch("/updateInchargeForm/:id",doctorControler.updateDetail)
 
 module.exports = route;
