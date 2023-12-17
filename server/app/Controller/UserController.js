@@ -119,11 +119,8 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.cookie("d_ID",doctor.dId,{
-                            httpOnly: true,
-                            secure: false
-                        })
-                        res.status(200).render("home",{doctor: doctor});
+                        res.cookie("d_ID",doctor.dId)
+                        res.status(200).render("dashboard",{doctor: doctor});
                     }
                 }
             );
@@ -146,7 +143,6 @@ class UserController {
                 `select * from patients where email = '${email}'`,
                 async (err, result) => {
                     let patient = result[0];
-                    console.log(patient)
                     if (!patient) {
                         res.status(404).json("error");
                     }
@@ -180,15 +176,11 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.cookie("pId", patient.pId,{
-                            httpOnly: true,
-                            secure: false,
-                        } )
+                        res.cookie("pId", patient.pId )
                         res.render("dashboard",{patient: patient})
                     }
                 }
             );
-
             // Verify Password
         } catch (e) {
             console.log(e);

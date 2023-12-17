@@ -91,8 +91,49 @@
                     tab.classList.add("active");
                 });
             });
-
             let cookies= document.cookie
-            console.log(cookies)
+            let ulTag= document.getElementById("sidebar")
+
+            if(cookies.includes("pId")){
+                ulTag.innerHTML=`          <li class="active">
+            <div class="nav_icon">
+              <i class="fa-solid fa-bed-pulse"></i>
+              <a href="#">Patients</a>
+            </div>
+            <ul class="sub_nav">
+              <li>
+                <div class="nav_icon">
+                  <i class="fa-solid fa-calendar-check"></i>
+                  <a href="#">Book online</a>
+                </div>
+
+                <div class="nav_icon">
+                  <i class="fa-solid fa-calendar-check"></i>
+                  <a href="#">Scheduled appointment</a>
+                </div>
+              </li>
+            </ul>
+          </li>`
+            }else {
+                ulTag.innerHTML=` <li>
+            <div class="nav_icon">
+              <i class="fa-solid fa-user-doctor"></i>
+              <a href="#">Doctors</a>
+            </div>
+            <ul class="sub_nav">
+              <li>
+                <div class="nav_icon">
+                  <i class="fa-brands fa-wpforms"></i>
+                  <a href="#">In charge form</a>
+                </div>
+
+                <div class="nav_icon">
+                  <i class="fa-solid fa-users"></i>
+                  <a href="#">Patients managed</a>
+                </div>
+              </li>
+            </ul>
+          </li>`
+            }
         </script>
 
