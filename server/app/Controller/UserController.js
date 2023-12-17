@@ -272,6 +272,8 @@ class UserController {
     logout(req, res) {
         res.clearCookie("accessToken");
         res.clearCookie("refreshToken");
+        res.clearCookie("pId")
+        res.clearCookie("dId")
         res.redirect("/");
     }
 }
