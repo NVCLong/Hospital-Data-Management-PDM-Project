@@ -87,24 +87,6 @@ body {
   margin: 2rem 0 2rem 0;
   padding: 0 2.5rem 0.5rem 2rem;
   width: calc(100% - 3rem);
-  /* svg {
-    position: absolute;
-    fill: white;
-    width: 16px;
-    height: 16px;
-    right: 0;
-    top: 7px;
-  } */
-}
-.name::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  background: #4777ce;
-  border-radius: 20px;
-  position: absolute;
-  top: 6px;
-  right: -2px;
 }
 
 main {
@@ -123,11 +105,11 @@ main > header {
   background: #e5e5e9;
 }
 .content-columns .col {
+  margin: auto;
   min-height: 500px;
-  width: 200px;
+  width: 800px;
   padding: 1rem;
   background: #ebecee;
-  margin-right: 1rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.04);
   border-radius: 5px;
 }
@@ -147,7 +129,8 @@ main > header {
 .item {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
-  min-height: 50px;
+  min-height: 150px;
+  height: 100px;
   border-radius: 5px;
   margin: 0 0 0.5rem 0;
 }

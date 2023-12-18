@@ -1,87 +1,50 @@
+<body>
+  <div class="site-wrap">
+    <nav class="site-nav">
+      <div class="name">Dashboard</div>
 
-    <body>
-        <div class="site-wrap">
-            <nav class="site-nav">
-                <div class="name">Dashboard</div>
+      <ul id="sidebar">
 
-                <ul id="sidebar">
+      </ul>
 
+      <div class="note">
+        <h3>PDM Project</h3>
+        <p>Hospital Data Management</p>
+      </div>
+    </nav>
 
-                </ul>
-
-                <div class="note">
-                    <h3>PDM Project</h3>
-                    <p>Hospital Data Management</p>
-                </div>
-            </nav>
-
-            <main>
-                <header>
-                    <div class="breadcrumbs">
-                        <i class="fa-solid fa-home"></i>
-                        <a href="#0/">Home</a>
-                    </div>
-
-                    <h1 class="title">Patients</h1>
-
-                    <nav class="nav-tabs" id="nav-tabs">
-                        <a href="#0" class="active">
-                            Today
-                            <span>14</span>
-                        </a>
-                        <a href="#0">
-                            Pending
-                            <span>24</span>
-                        </a>
-                    </nav>
-                </header>
-
-                <div class="content-columns">
-                    <div class="col">
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                    </div>
-                    <div class="col">
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                    </div>
-                    <div class="col">
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                    </div>
-                    <div class="col">
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                        <div class="item"></div>
-                    </div>
-                </div>
-            </main>
+    <main>
+      <header>
+        <div class="breadcrumbs">
+          <i class="fa-solid fa-home"></i>
+          <a href="#0/">Home</a>
         </div>
 
-        <script>
+        <h1 id="title">
+
+        </h1>
+
+        <nav class="nav-tabs" id="nav-tabs">
+          <a href="#0" class="active">
+            Today
+            <span>14</span>
+          </a>
+          <a href="#0">
+            Pending
+            <span>24</span>
+          </a>
+        </nav>
+      </header>
+
+      <div class="content-columns">
+        <div class="col">
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
             const navTabs = document.querySelectorAll("#nav-tabs > a");
             navTabs.forEach((tab) => {
                 tab.addEventListener("click", () => {
@@ -114,6 +77,9 @@
               </li>
             </ul>
           </li>`
+            let title = document.getElementById("title");
+            console.log(title);
+            title.innerText = "Patient";
             }else {
                 ulTag.innerHTML=` <li>
             <div class="nav_icon">
@@ -124,15 +90,18 @@
               <li>
                 <div class="nav_icon">
                   <i class="fa-brands fa-wpforms"></i>
-                  <a href="#">In charge form</a>
+                  <a href="/doctor/patientlist">In charge form</a>
                 </div>
                 <div class="nav_icon">
-                  <i class="fa-solid fa-users"></i>
-                  <a href="#">Patients managed</a>
+                  <i class="fa-solid fa-list"></i>
+                  <a href="/doctor/getAllAppointments">Appointment list</a>
                 </div>
               </li>
             </ul>
           </li>`
+
+            let title = document.getElementById("title");
+            console.log(title);
+            title.innerText = "Doctor";
             }
         </script>
-

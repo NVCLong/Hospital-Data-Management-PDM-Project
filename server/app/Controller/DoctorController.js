@@ -14,10 +14,10 @@ class DoctorController {
         const d_Id= req.cookies.d_ID;
         // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
         try {
-            await db.query(`SELECT *  FROM inchargeof  WHERE dId=${d_Id}`,(err, result) => {
+            await db.query(`SELECT *  FROM inchargeof WHERE dId=${d_Id}`,(err, result) => {
                 if (err) { throw err; }
-                console.log(typeof  result)
-                res.render('doctor/patient_list',{patients: result})
+                console.log(typeof result)
+                res.render('doctor/patientlist',{patients: result})
             });
         } catch (error) {
             console.log(error);
@@ -29,7 +29,7 @@ class DoctorController {
         try {
             const dId=req.cookies.d_ID;
             await db.query(`SELECT name, date, time FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`,(err,result)=>{
-                res.render("doctor/appointmentList",{appointment: multipleSQLToObject(result)});
+                res.render("doctor/appointmentList",{appointment:result});
             } );
         }catch (error) {
             console.log(error);
