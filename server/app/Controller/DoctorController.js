@@ -12,6 +12,7 @@ class DoctorController {
     //[GET] /doctor/patient_list
     async getAllPatients(req, res) {
         const d_Id= req.cookies.d_ID;
+        console.log(d_Id);
         // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
         try {
             await db.query(`SELECT pName,pId  FROM inchargeof WHERE dId=${d_Id}`,(err, result) => {
@@ -26,12 +27,13 @@ class DoctorController {
     //[GET] /doctor/patient_list/:id
     async patientInformation(req, res){
         const patientId = req.params.id;
-        const d_Id= req.cookies.d_Id;
+        const d_Id= req.cookies.d_ID;
         try{
             await db.query(`SELECT * FROM inchargeof WHERE pId=${patientId} AND dId=${d_Id}`,(err, result)=>{
                 if (err){
                     console.log(err)
                 }
+                console.log(result)
                 res.render('doctor/inchargeInformation', {patient: result})
             })
         }catch (error){
