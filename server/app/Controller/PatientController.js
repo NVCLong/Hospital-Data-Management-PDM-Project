@@ -112,27 +112,6 @@ class PatientController {
         }
     }
 
-    // [PATCH] /patient/edit/:id
-    async editPatientInfo(req, res) {
-        const { name, age, address, phoneNumber, insuranceNumber, password } =
-            req.body;
-        const patientId = req.cookies.id;
-
-        try {
-            await db.query(
-                // `UPDATE patients SET name = ?, age = ?, address = ?, phoneNumber = ?, insuranceNumber = ?, password = ? WHERE id = ?`,
-                // [name, age, address, phoneNumber, insuranceNumber, password, patientId],
-                `UPDATE patients SET patients.name = '${name}', patients.age = '${age}', patients.address = '${address}', patients.phoneNumber = '${phoneNumber}', patients.insuranceNumber = '${insuranceNumber}', patients.password = '${password}' WHERE patients.pId = ${patientId}`,
-                (err) => {
-                    if (err) throw err;
-                    res.redirect("/patient/details/" + patientId);
-                }
-            );
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
         // [PATCH] /patient/updateInfo/:id
         async updatePatientInfo(req, res) {
             const patientId = req.params.id;
