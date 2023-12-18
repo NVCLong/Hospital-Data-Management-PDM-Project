@@ -120,7 +120,7 @@ class UserController {
                             secure: false,
                         });
                         res.cookie("d_ID",doctor.dId)
-                        res.status(200).render("dashboard",{doctor: doctor});
+                        res.redirect("/dashboard");
                     }
                 }
             );
@@ -177,7 +177,7 @@ class UserController {
                             secure: false,
                         });
                         res.cookie("pId", patient.pId )
-                        res.render("dashboard",{patient: patient})
+                        res.redirect("/dashboard")
                     }
                 }
             );

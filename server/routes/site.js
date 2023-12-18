@@ -5,8 +5,8 @@ const userController = require("../app/Controller/UserController");
 const middlewareController = require("../app/Controller/MiddlewareController");
 
 route.get(
-    "/show",
-    siteController.showUser
+    "/dashboard",
+    siteController.dashboard
 );
 route.get("/", siteController.homepage);
 

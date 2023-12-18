@@ -4,8 +4,8 @@ class SiteController {
         res.render('home');
         // UI will render something depend on frontend and UI (do not have response data)
     }
-    showUser(req, res) {
-        res.status(200).json({ success: true });
+    dashboard(req, res) {
+        res.status(200).render('dashboard');
     }
 }
 

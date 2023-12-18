@@ -118,7 +118,7 @@ class DoctorController {
                     console.log(err)
                     throw err
                 }
-                res.redirect('/doctor/patient_list')
+                res.redirect('/doctor/patientlist')
             })
         }catch (e) {
             console.log(e)
