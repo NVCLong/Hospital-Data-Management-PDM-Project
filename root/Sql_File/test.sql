@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 15, 2023 lúc 02:40 AM
+-- Thời gian đã tạo: Th12 17, 2023 lúc 05:20 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -137,7 +137,7 @@ CREATE TABLE `inchargeof` (
 --
 
 INSERT INTO `inchargeof` (`startDay`, `dId`, `pId`, `pName`, `details`) VALUES
-('2023-12-08', 1, 1, 'Vo Van Xuan', 'Benh dai'),
+('2023-12-08', 1, 1, 'Vo Van Xuan', 'An Toan '),
 ('2023-12-09', 2, 2, 'Nguyen Thi Quynh', 'Dau dau'),
 ('2023-12-10', 3, 3, 'Tran Dinh Hau', 'Dang on'),
 ('2023-12-13', 4, 4, 'Tran Dinh Hau', 'Nguy kich'),

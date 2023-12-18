@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package-v2.json",
   "name": "hospital-data-management-pdm-project",
   "version": "1.0.0",
   "description": "",
@@ -6,7 +7,13 @@
   "scripts": {
     "start": "nodemon --inspect server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "sass --no-source-map --watch server/resource/scss/app.scss server/public/css/app.css"
+    "homepage": "sass --no-source-map --watch server/resource/scss/homepage.scss  server/public/css/homepage.css",
+    "dashboard": "sass --no-source-map --watch server/resource/scss/dashboard.scss  server/public/css/dashboard.css",
+    "doctor_login": "sass --no-source-map --watch server/resource/scss/doctor_login.scss  server/public/css/doctor_login.css",
+    "doctor_register": "sass --no-source-map --watch server/resource/scss/doctor_register.scss  server/public/css/doctor_register.css",
+    "login": "sass --no-source-map --watch server/resource/scss/login.scss  server/public/css/login.css",
+    "register": "sass --no-source-map --watch server/resource/scss/register.scss  server/public/css/register.css",
+    "all": "concurrently \"npm run homepage\" \"npm run dashboard\" \"npm run doctor_login\" \"npm run doctor_register\" \"npm run login\" \"npm run register\""
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +28,10 @@
     "nodemon": "^3.0.2"
   },
   "dependencies": {
+    "concurrently": "^8.2.2",
     "express-handlebars": "^7.1.2",
-    "sass": "^1.69.5",
-    "node-sass": "^9.0.0"
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.69.5"
   }
 }

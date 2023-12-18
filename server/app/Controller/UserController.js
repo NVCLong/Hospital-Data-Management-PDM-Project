@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mysql = require("mysql");
 const { RANDOM } = require("mysql/lib/PoolSelector");
-const untils = require("../../untils/Sql");
+const untils= require("../../untils/Sql");
 const db = (connect = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -13,13 +13,13 @@ const db = (connect = mysql.createConnection({
 
 class UserController {
     static id = 0;
-    static docId = 1;
+    static docId =1;
 
     //[GET] /authenication/
     static refreshTokenList = [];
     async loginForm(req, res) {
         try {
-            res.render("authentication/loginForm");
+            res.render('authentication/loginForm');
         } catch (e) {
             console.log(e);
             res.json({ success: false });
@@ -27,14 +27,14 @@ class UserController {
     }
 
     //[GET]  /authentication/register
-    registerForm(req, res) {
-        res.render("authentication/registerForm");
+    registerForm(req,res){
+        res.render('authentication/registerForm');
     }
 
     //[GET] authentication/doctor/loginForm
     async loginFormDoctor(req, res) {
         try {
-            res.render("authentication/loginDoctor");
+            res.render('authentication/loginDoctor');
         } catch (e) {
             console.log(e);
             res.json({ success: false });
@@ -42,13 +42,13 @@ class UserController {
     }
 
     //[GET]  /authentication/doctor/registerForm
-    registerFormDoctor(req, res) {
-        res.render("authentication/registerDoctor");
+    registerFormDoctor(req,res){
+        res.render('authentication/registerDoctor');
     }
 
     //[GET]] /authentication/doctor/register
-    async registerDoctor(req, res) {
-        try {
+    async registerDoctor(req,res){
+        try{
             // hash password to enhance the security of the user account
             // which store in database
 
@@ -73,8 +73,9 @@ class UserController {
             );
             UserController.id++;
             res.json({ msg: "success" });
-        } catch (e) {
-            console.log(e);
+
+        }catch(e){
+            console.log(e)
         }
     }
     //[POST] /authentication/doctor/login
@@ -85,7 +86,7 @@ class UserController {
             db.query(
                 `select * from doctors where email = '${email}'`,
                 async (err, result) => {
-                    let doctor = result[0];
+                     let doctor = result[0];
                     if (!doctor) {
                         res.status(404).json("error");
                     }
@@ -93,7 +94,7 @@ class UserController {
                     if (!validPassword) {
                         res.status(200).json("Different password");
                     } else if (validPassword && doctor) {
-                        let accessToken = jwt.sign(
+                        let accessToken=jwt.sign(
                             {
                                 name: doctor.email,
                                 password: doctor.password,
@@ -101,7 +102,7 @@ class UserController {
                             "secret",
                             { expiresIn: 60 }
                         );
-                        let refreshToken = jwt.sign(
+                        let refreshToken=jwt.sign(
                             {
                                 name: doctor.email,
                                 password: doctor.password,
@@ -118,11 +119,8 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.cookie("dId", doctor.dId, {
-                            httpOnly: true,
-                            secure: false,
-                        });
-                        res.status(200).render("home", { doctor: doctor });
+                        res.cookie("d_ID",doctor.dId)
+                        res.redirect("/dashboard");
                     }
                 }
             );
@@ -134,27 +132,25 @@ class UserController {
         // store user to database
     }
 
+
     //[POST]  /authentication/login
     async loginSubmit(req, res) {
         let email = req.body.email;
         let password = req.body.password;
         try {
+
             db.query(
                 `select * from patients where email = '${email}'`,
                 async (err, result) => {
                     let patient = result[0];
-                    console.log(patient);
                     if (!patient) {
                         res.status(404).json("error");
                     }
-                    const validPassword = await bcrypt.compare(
-                        password,
-                        patient.password
-                    );
+                    const validPassword = await bcrypt.compare(password, patient.password);
                     if (!validPassword) {
                         res.status(200).json("Different password");
                     } else if (validPassword && patient) {
-                        let accessToken = jwt.sign(
+                        let accessToken=jwt.sign(
                             {
                                 email: patient.email,
                                 password: patient.password,
@@ -162,7 +158,7 @@ class UserController {
                             "secret",
                             { expiresIn: 60 }
                         );
-                        let refreshToken = jwt.sign(
+                        let refreshToken= jwt.sign(
                             {
                                 email: patient.email,
                                 password: patient.password,
@@ -180,15 +176,11 @@ class UserController {
                             httpOnly: true,
                             secure: false,
                         });
-                        res.cookie("pId", patient.pId, {
-                            httpOnly: true,
-                            secure: false,
-                        });
-                        res.render("home", { patient: patient });
+                        res.cookie("pId", patient.pId )
+                        res.redirect("/dashboard")
                     }
                 }
             );
-
             // Verify Password
         } catch (e) {
             console.log(e);
@@ -221,7 +213,8 @@ class UserController {
                 }
             );
             UserController.id++;
-            res.json({ msg: "success" });
+            res.redirect("/");
+
         } catch (e) {
             console.log(e);
         }
@@ -279,6 +272,8 @@ class UserController {
     logout(req, res) {
         res.clearCookie("accessToken");
         res.clearCookie("refreshToken");
+        res.clearCookie("pId")
+        res.clearCookie("d_Id")
         res.redirect("/");
     }
 }
