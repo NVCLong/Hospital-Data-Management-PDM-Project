@@ -14,12 +14,27 @@ class DoctorController {
         const d_Id= req.cookies.d_ID;
         // const doctorDeptid= req.cookies.doctor_deptid;  // đăng nhập lưu cái deptid của doctor vào cookies rồi lấy ra để check
         try {
-            await db.query(`SELECT *  FROM inchargeof WHERE dId=${d_Id}`,(err, result) => {
+            await db.query(`SELECT pName,pId  FROM inchargeof WHERE dId=${d_Id}`,(err, result) => {
                 if (err) { throw err; }
                 console.log(typeof result)
                 res.render('doctor/patientlist',{patients: result})
             });
         } catch (error) {
+            console.log(error);
+        }
+    }
+    //[GET] /doctor/patient_list/:id
+    async patientInformation(req, res){
+        const patientId = req.params.id;
+        const d_Id= req.cookies.d_Id;
+        try{
+            await db.query(`SELECT * FROM inchargeof WHERE pId=${patientId} AND dId=${d_Id}`,(err, result)=>{
+                if (err){
+                    console.log(err)
+                }
+                res.render('doctor/inchargeInformation', {patient: result})
+            })
+        }catch (error){
             console.log(error);
         }
     }
@@ -35,6 +50,7 @@ class DoctorController {
             console.log(error);
         }
     }
+
 
     //[GET] /doctor/inChargeForm/:id
     async  inChargeForm(req, result) {

@@ -29,10 +29,10 @@
             <div class="content-columns">
                 <div class="col">
                     {{#each patients}}
-                    <a href="#">
+                    <a href="/doctor/patientlist/{{this.pId}}">
                         <div class="item">
                         {{this.pName}}
-                    </div>
+                         </div>
                     </a>
                     {{/each}}
 
@@ -88,7 +88,7 @@
               <li>
                 <div class="nav_icon">
                   <i class="fa-brands fa-wpforms"></i>
-                  <a href="/doctor/patient_list">In charge form</a>
+                  <a href="/doctor/patientlist">In charge form</a>
                 </div>
                 <div class="nav_icon">
                   <i class="fa-solid fa-list"></i>
