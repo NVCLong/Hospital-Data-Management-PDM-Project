@@ -45,27 +45,26 @@
             <li class="active">
             <div class="nav_icon">
               <i class="fa-solid fa-bed-pulse"></i>
-              <a href="#">Patients</a>
+              <a href="/patient/patientDetails">Patient information</a>
             </div>
-            <ul class="sub_nav">
-              <li>
-                <div class="nav_icon">
+            <li>
+                {{!-- <div class="nav_icon">
                   <i class="fa-solid fa-calendar-check"></i>
                   <a href="#">Book online</a>
-                </div>
+                </div> --}}
 
                 <div class="nav_icon">
                   <i class="fa-solid fa-calendar-check"></i>
                   <a href="#">Scheduled appointment</a>
                 </div>
               </li>
-            </ul>
           </li>`
             let title = document.getElementById("title");
             console.log(title);
             title.innerText = "Patient";
             }else {
-                ulTag.innerHTML=` <li>
+                ulTag.innerHTML=`
+            <li>
             <div class="nav_icon">
               <i class="fa-solid fa-user-doctor"></i>
               <a href="#">Doctors</a>

@@ -1,0 +1,74 @@
+<body>
+    <div class="site-wrap">
+        <nav class="site-nav">
+            <div class="name">Patient information</div>
+
+            <ul id="sidebar">
+                <li>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <a href="#">Patient information</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-list"></i>
+                        <a href="/patient/newAppointment">Appointment list</a>
+                    </div>
+            </ul>
+            </li>
+
+            </ul>
+
+            <div class="note">
+                <h3>PDM Project</h3>
+                <p>Hospital Data Management</p>
+            </div>
+        </nav>
+
+        <main>
+            <header>
+                <h1 id="title"> New appointment
+                </h1>
+            </header>
+            <div class="form-update-patient-info">
+                <form method="post" action="">
+                    <div class="update-patient-info">
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Enter meet day" name="meetDate" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="text" placeholder="Enter time" name="meetTime" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" placeholder="Enter doctor ID" name="dId" required />
+                        </div>
+                    </div>
+
+         <div class="editBtn">
+          <i class="fa-solid fa-pen"></i>
+          <a href="/patient/newAppointment/{{patient.pId}}">Submit appointment</a>
+            </div>
+
+                </form>
+            </div>
+
+    </div>
+    </main>
+
+    </div>
+
+    <script>
+        const navTabs = document.querySelectorAll("#nav-tabs > a");
+        navTabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                navTabs.forEach((tab) => {
+                    tab.classList.remove("active");
+                });
+                tab.classList.add("active");
+            });
+        });
+
+
+    </script>

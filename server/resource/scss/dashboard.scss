@@ -11,11 +11,13 @@ body {
   margin: 0;
   overflow: hidden;
 }
-.editBtn{
 
-  i{
+.editBtn {
+
+  i {
     padding-right: 15px;
   }
+
   display: flex;
   position: fixed;
   top: 500px;
@@ -30,6 +32,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(black, 0.04);
+
   :link {
     text-decoration: none;
     color: inherit;
@@ -68,13 +71,15 @@ body {
   }
 
 
-  ul  {
+  ul {
     margin-bottom: auto;
     list-style: none;
 
 
     li {
-      .nav_icon, a {
+
+      .nav_icon,
+      a {
         display: flex;
         align-items: center;
         padding: 0.5rem 2rem 0.5rem 1rem;
@@ -90,10 +95,11 @@ body {
         }
       }
 
-      &.active >a, .nav_icon {
+      &.active>a,
+      .nav_icon {
         background: linear-gradient(to right, #101b2d, transparent);
 
-        &::before  {
+        &::before {
           content: "";
           position: absolute;
           left: 0;
@@ -224,6 +230,7 @@ main {
   i {
     padding-right: 15px;
   }
+
   .col {
     display: flex;
     align-items: center;
@@ -340,9 +347,9 @@ main {
   }
 }
 
-.logo{
-  width: 100%;
-  height: 100%;
+.logo {
+  width: 500px;
+  height: 500px;
   margin: auto;
   display: block;
 }
@@ -357,11 +364,14 @@ main {
 }
 
 .nav-tabs {
-  ul, li {
+
+  ul,
+  li {
     margin: 0;
     padding: 0;
     list-style: none;
   }
+
   a {
     margin-right: 2rem;
     display: inline-block;
@@ -417,6 +427,7 @@ main {
   width: 40%;
 
 }
+
 fieldset {
   display: block;
   border: medium none !important;
@@ -426,14 +437,14 @@ fieldset {
   border-radius: 8px;
 
   i {
-  float: left;
-  padding-left: 10px;
-  color: #999;
-  background: transparent;
-  border: none;
-  outline: none;
-  border: 2px solid rgba(255, 255, 255, .2);
-  border-radius: 8px;
+    float: left;
+    padding-left: 10px;
+    color: #999;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 8px;
   }
 }
 
@@ -496,14 +507,14 @@ fieldset {
 }
 
 
-.logo_main{
+.logo_main {
   margin: auto;
   display: block;
   width: 400px;
   height: 400px;
 }
 
-.text_main{
+.text_main {
   color: #153066;
   font-size: 20px;
   text-align: center;
@@ -537,7 +548,7 @@ fieldset {
   .col {
     margin: auto;
     min-height: 500px;
-    width:1000px;
+    width: 1000px;
     padding: 1rem;
     background: #ebecee;
     box-shadow: 0 0 35px rgba(black, 0.04);
@@ -547,11 +558,11 @@ fieldset {
     height: 100px;
     line-height: 100px;
 
-    .delBtn{
+    .delBtn {
       width: 100px;
       height: 50px;
       align-items: center;
-      margin:0 0px 0 95px;
+      margin: 0 0px 0 95px;
       background: #f57992;
       border: none;
       color: white;
@@ -559,31 +570,31 @@ fieldset {
       font-size: 20px;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0px 5px 0 rgba(0,0,0,0.2), 0 0px 5px 0 rgba(0,0,0,0.19);
+      box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.19);
 
-    :link {
-      text-decoration: none;
-      color: inherit;
+      :link {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      :visited {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      :hover {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      :active {
+        text-decoration: none;
+        color: inherit;
+      }
     }
 
-    :visited {
-      text-decoration: none;
-      color: inherit;
-    }
 
-    :hover {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    :active {
-      text-decoration: none;
-      color: inherit;
-    }
-  }
-
-
-    .item{
+    .item {
       text-align: left;
       padding-left: 15px;
     }
@@ -608,4 +619,74 @@ fieldset {
 }
 
 
+.form-update-patient-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
 
+.update-patient-info {
+  height: 280px;
+  align-items: center;
+
+
+  .input-field {
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    max-height: 60px;
+    width: 400px;
+    transition: max-height 0.3s ease 0.3s;
+    overflow: hidden;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  input {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+  }
+
+  .input-field i {
+    margin-left: 15px;
+    color: #999;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 20px 45px 20px 20px;
+  }
+}
+
+.editBtn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+  width: 50%;
+  height: 20%;
+  background: #244275;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+  outline: 0;
+  padding: 30px 30px;
+  border-radius: 8px;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, .2);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  padding: 20px 20px 20px 20px;
+  font-size: 18px;
+  transition: background 0.1s ease 0.1s;
+}
+
+.editBtn:hover {
+  background: #4a82e2;
+  color: #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transition: background 0.1s ease 0.1s;
+}

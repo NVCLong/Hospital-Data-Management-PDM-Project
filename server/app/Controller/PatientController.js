@@ -87,7 +87,7 @@ class PatientController {
                         throw err;
                     }
                     console.log(result);
-                    res.render("patient/details", { patients: result });
+                    res.render("patient/details", { patients: result[0] });
                 }
             );
         } catch (error) {
@@ -116,13 +116,13 @@ class PatientController {
         async updatePatientInfo(req, res) {
             const patientId = req.params.id;
             const updates = req.body;
-    
+
             const updateFields = Object.keys(updates);
             const updateValues = Object.values(updates);
-    
+
             try {
                 const updateSetClause = updateFields.map(field => `${field} = ?`).join(', ');
-    
+
                 await db.query(
                     `UPDATE patients SET ${updateSetClause} WHERE pId = ?`,
                     [...updateValues, patientId],

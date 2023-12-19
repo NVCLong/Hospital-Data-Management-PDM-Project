@@ -67,7 +67,8 @@ body {
   margin-bottom: auto;
   list-style: none;
 }
-.site-nav ul li .nav_icon, .site-nav ul li a {
+.site-nav ul li .nav_icon,
+.site-nav ul li a {
   display: flex;
   align-items: center;
   padding: 0.5rem 2rem 0.5rem 1rem;
@@ -77,13 +78,17 @@ body {
   line-height: 100%;
   text-align: left;
 }
-.site-nav ul li .nav_icon:hover, .site-nav ul li .nav_icon:focus, .site-nav ul li a:hover, .site-nav ul li a:focus {
+.site-nav ul li .nav_icon:hover, .site-nav ul li .nav_icon:focus,
+.site-nav ul li a:hover,
+.site-nav ul li a:focus {
   color: #4371c5;
 }
-.site-nav ul li.active > a, .site-nav ul li .nav_icon {
+.site-nav ul li.active > a,
+.site-nav ul li .nav_icon {
   background: linear-gradient(to right, #101b2d, transparent);
 }
-.site-nav ul li.active > a::before, .site-nav ul li .nav_icon::before {
+.site-nav ul li.active > a::before,
+.site-nav ul li .nav_icon::before {
   content: "";
   position: absolute;
   left: 0;
@@ -285,8 +290,8 @@ main > header {
 }
 
 .logo {
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 500px;
   margin: auto;
   display: block;
 }
@@ -300,7 +305,8 @@ main > header {
   margin: 0 0 0.5rem 0;
 }
 
-.nav-tabs ul, .nav-tabs li {
+.nav-tabs ul,
+.nav-tabs li {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -522,4 +528,72 @@ fieldset i {
 }
 .appointmentList .col:nth-child(4) {
   border-top: 4px solid #ebbd41;
+}
+
+.form-update-patient-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.update-patient-info {
+  height: 280px;
+  align-items: center;
+}
+.update-patient-info .input-field {
+  background: #eaeaea;
+  margin: 15px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  max-height: 60px;
+  width: 400px;
+  transition: max-height 0.3s ease 0.3s;
+  overflow: hidden;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+}
+.update-patient-info input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 18px 15px;
+}
+.update-patient-info .input-field i {
+  margin-left: 15px;
+  color: #999;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 20px 45px 20px 20px;
+}
+
+.editBtn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+  width: 50%;
+  height: 20%;
+  background: #244275;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+  outline: 0;
+  padding: 30px 30px;
+  border-radius: 8px;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  padding: 20px 20px 20px 20px;
+  font-size: 18px;
+  transition: background 0.1s ease 0.1s;
+}
+
+.editBtn:hover {
+  background: #4a82e2;
+  color: #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transition: background 0.1s ease 0.1s;
 }

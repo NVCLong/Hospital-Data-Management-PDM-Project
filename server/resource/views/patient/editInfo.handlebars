@@ -1,0 +1,93 @@
+<body>
+    <div class="site-wrap">
+        <nav class="site-nav">
+            <div class="name">Patient information</div>
+
+            <ul id="sidebar">
+                <li>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <a href="#">Patient information</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-list"></i>
+                        <a href="/patient/newAppointment">Appointment list</a>
+                    </div>
+            </ul>
+            </li>
+
+            </ul>
+
+            <div class="note">
+                <h3>PDM Project</h3>
+                <p>Hospital Data Management</p>
+            </div>
+        </nav>
+
+        <main>
+            <header>
+                <h1 id="title"> Edit Personal Information
+                </h1>
+            </header>
+            <div class="form-update-patient-info">
+                <form method="POST" action="">
+                    <div class="update-patient-info">
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Enter patient name" name="name" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="Enter patient email" name="email" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" placeholder="Enter your phone number" name="phoneNumber" required />
+                        </div>
+
+                        <div class="input-field">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <input type="text" placeholder="Enter your address" name="address" required />
+                        </div>
+                    </div>
+
+                        <div class="editBtn">
+          <i class="fa-solid fa-pen"></i>
+          <a href="/patient/updateInfo/{{patient.pId}}?_method=PATCH">Edit</a>
+    </div>
+
+                </form>
+            </div>
+
+    </div>
+    </main>
+
+    </div>
+
+    <script>
+        const navTabs = document.querySelectorAll("#nav-tabs > a");
+        navTabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                navTabs.forEach((tab) => {
+                    tab.classList.remove("active");
+                });
+                tab.classList.add("active");
+            });
+        });
+
+        function submitPatch() {
+            const formData = new FormData(document.getElementById('status'));
+            fetch('/patient/updateInfo/{{patient.id}}', {
+                method: 'PATCH',
+                body: formData,
+            })
+                .then(() => {
+                    // Handle successful update
+                })
+                .catch(error => {
+                    // Handle errors
+                });
+        }
+
+
+    </script>
