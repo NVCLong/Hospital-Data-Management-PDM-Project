@@ -35,7 +35,6 @@ class PatientController {
     async showNewAppointmentForm(req, res) {
         try {
             const patientID = req.cookies.pID;
-            // const doctors = await this.getAvailableDoctors();
             res.render("patient/newAppointment", { patientID: patientID });
         } catch (error) {
             console.log(error);
@@ -67,7 +66,7 @@ class PatientController {
             await db.query(
                 `INSERT INTO appointments SET ?`,
                 newAppointment,
-                (err, result) => {
+                (err) => {
                     if (err) throw err;
                     res.redirect("/patient/appointments");
                 }
@@ -113,24 +112,28 @@ class PatientController {
         }
     }
 
-    // [PATCH] /patient/edit/:id
-    async editPatientInfo(req, res) {
-        const { name, age, address, phoneNumber, insuranceNumber, password } =
-            req.body;
-        const patientId = req.params.id;
-
-        try {
-            await db.query(
-                `UPDATE patients SET name = ?, age = ?, address = ?, phoneNumber = ?, insuranceNumber = ?, password = ? WHERE id = ?`,
-                [name, age, address, phoneNumber, insuranceNumber, password, patientId],
-                (err, result) => {
-                    if (err) throw err;
-                    res.redirect("/patient/details/" + patientId);
-                }
-            );
-        } catch (error) {
-            console.log(error);
+        // [PATCH] /patient/updateInfo/:id
+        async updatePatientInfo(req, res) {
+            const patientId = req.params.id;
+            const updates = req.body;
+    
+            const updateFields = Object.keys(updates);
+            const updateValues = Object.values(updates);
+    
+            try {
+                const updateSetClause = updateFields.map(field => `${field} = ?`).join(', ');
+    
+                await db.query(
+                    `UPDATE patients SET ${updateSetClause} WHERE pId = ?`,
+                    [...updateValues, patientId],
+                    (err, result) => {
+                        if (err) throw err;
+                        res.redirect(`/patientDetails`);
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
 }
 module.exports = new PatientController();
