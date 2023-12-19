@@ -33,8 +33,8 @@ class DoctorController {
                 if (err){
                     console.log(err)
                 }
-                console.log(result)
-                res.render('doctor/inchargeInformation', {patient: result})
+
+                res.render('doctor/inchargeInformation', {patient: result[0]})
             })
         }catch (error){
             console.log(error);
@@ -97,23 +97,30 @@ class DoctorController {
     //GET]  /doctor/updateInchargeDetails/:id
     async updateForm(req,res){
         try{
-            await db.query(`SELECT details FROM inchargeof WHERE inchargeof.pId= ${req.params.id}`, (err, result)=>{
+            await db.query(`SELECT * FROM inchargeof WHERE inchargeof.pId= ${req.params.id}` , (err, result)=>{
                 if(err){
                     console.log(err)
                     throw err;
                 }
-                res.render("doctor/updateInchargeDetails",{details:result})
+                console.log(result)
+                res.render("doctor/updateInchargeDetails",{patient:result[0]})
             })
         }catch (e) {
             console.log(e);
         }
     }
-    //[PATCH] /doctor/updateForm/:id
+    //[PUT] /doctor/updateForm/:id
     async updateDetail(req,res){
         try{
-            const details = req.body.details
-            const dId=req.cookies.d_ID;
-            await db.query(`Update inchargeof SET inchargeof.details="${details}" WHERE inchargeof.pId=${req.params.id} AND inchargeof.dId=${dId}`,(err, result)=>{
+
+              let  startDay= req.body.startDay
+               let pId= req.params.pId
+            let dId=  req.params.dId
+               let  pName= req.body.pName
+               let  details= req.body.details
+
+
+            await db.query(`Update inchargeof SET inchargeof.details="${details}", inchargeof.startDay="${{startDay}}, inchargeof.pId=${{pId}}, inchargeof.dId="${{dId}}, inchargeof.pName="${{pName}}" inch WHERE inchargeof.pId=${req.params.id} AND inchargeof.dId=${dId}`,(err, result)=>{
                 if (err){
                     console.log(err)
                     throw err

@@ -15,30 +15,13 @@
 
     <main>
       <header>
-        <div class="breadcrumbs">
-          <i class="fa-solid fa-home"></i>
-          <a href="#0/">Home</a>
-        </div>
-
         <h1 id="title">
-
         </h1>
-
-        <nav class="nav-tabs" id="nav-tabs">
-          <a href="#0" class="active">
-            Today
-            <span>14</span>
-          </a>
-          <a href="#0">
-            Pending
-            <span>24</span>
-          </a>
-        </nav>
       </header>
 
       <div class="content-columns">
         <div class="col">
-
+          <img src="/images/PDM_logo.png" class="logo" width="500" height="500">
         </div>
       </div>
     </main>
@@ -58,7 +41,8 @@
             let ulTag= document.getElementById("sidebar")
 
             if(cookies.includes("pId")){
-                ulTag.innerHTML=`          <li class="active">
+                ulTag.innerHTML=`
+            <li class="active">
             <div class="nav_icon">
               <i class="fa-solid fa-bed-pulse"></i>
               <a href="#">Patients</a>
@@ -86,18 +70,14 @@
               <i class="fa-solid fa-user-doctor"></i>
               <a href="#">Doctors</a>
             </div>
-            <ul class="sub_nav">
-              <li>
                 <div class="nav_icon">
                   <i class="fa-brands fa-wpforms"></i>
-                  <a href="/doctor/patientlist">In charge form</a>
+                  <a href="/doctor/patientlist">Patient list</a>
                 </div>
                 <div class="nav_icon">
                   <i class="fa-solid fa-list"></i>
                   <a href="/doctor/getAllAppointments">Appointment list</a>
                 </div>
-              </li>
-            </ul>
           </li>`
 
             let title = document.getElementById("title");

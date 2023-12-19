@@ -112,12 +112,8 @@ form p {
   font-weight: 700;
   letter-spacing: 2px;
   cursor: pointer;
-  border-radius: 40px;
-  padding: 20px 45px 20px 20px;
+  padding: 20px 20px 20px 20px;
   font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  cursor: pointer;
   transition: background 0.1s ease 0.1s;
 }
 

@@ -1,0 +1,78 @@
+<body>
+    <div class="site-wrap">
+        <nav class="site-nav">
+            <div class="name">Patient information</div>
+
+            <ul id="sidebar">
+                <li>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <a href="#">Patient information</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-brands fa-wpforms"></i>
+                        <a href="/doctor/patientlist">In charge form</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-list"></i>
+                        <a href="/doctor/getAllAppointments">Appointment list</a>
+                    </div>
+                </ul>
+            </li>
+
+        </ul>
+
+        <div class="note">
+            <h3>PDM Project</h3>
+            <p>Hospital Data Management</p>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <main></main>
+            <h1 id="title"> Update patient status
+            </h1>
+        </header>
+        <form id="status" method="post" action="/doctor/inchargeForm">
+            <fieldset>
+                <input placeholder="Input patient ID" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Input doctor ID" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Input patient name" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Input patient status" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Input patient start date" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            </fieldset>
+        </form>
+
+
+
+        </div>
+    </main>
+
+</div>
+
+<script>
+            const navTabs = document.querySelectorAll("#nav-tabs > a");
+            navTabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                    navTabs.forEach((tab) => {
+                        tab.classList.remove("active");
+                    });
+                    tab.classList.add("active");
+                });
+            });
+
+
+        </script>
+

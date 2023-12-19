@@ -1,105 +1,102 @@
-
 <body>
-    <div class="site-wrap">
-        <nav class="site-nav">
-            <div class="name">Patient list</div>
+  <div class="site-wrap">
+    <nav class="site-nav">
+      <div class="name">Patient list</div>
 
-            <ul id="sidebar">
+      <ul id="sidebar">
 
-            </ul>
+      </ul>
 
-            <div class="note">
-                <h3>PDM Project</h3>
-                <p>Hospital Data Management</p>
+      <div class="note">
+        <h3>PDM Project</h3>
+        <p>Hospital Data Management</p>
+      </div>
+    </nav>
+
+    <main>
+      <header>
+        {{!-- <div class="breadcrumbs">
+          <i class="fa-solid fa-home"></i>
+          <a href="#0/">Home</a>
+        </div> --}}
+
+        <h1 id="title">
+
+        </h1>
+      </header>
+
+      <div class="content-columns">
+        <div class="col">
+          {{#each patients}}
+          <a href="/doctor/patientlist/{{this.pId}}">
+            <div class="item">
+              {{this.pName}}
             </div>
-        </nav>
+          </a>
+          {{/each}}
 
-        <main>
-            <header>
-                <div class="breadcrumbs">
-                    <i class="fa-solid fa-home"></i>
-                    <a href="#0/">Home</a>
-                </div>
+        </div>
+      </div>
+    </main>
+  </div>
 
-                <h1 id="title">
+  <script>
+    const navTabs = document.querySelectorAll("#nav-tabs > a");
+    navTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        navTabs.forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        tab.classList.add("active");
+      });
+    });
 
-                </h1>
-            </header>
+    let cookies = document.cookie
+    let ulTag = document.getElementById("sidebar")
 
-            <div class="content-columns">
-                <div class="col">
-                    {{#each patients}}
-                    <a href="/doctor/patientlist/{{this.pId}}">
-                        <div class="item">
-                        {{this.pName}}
-                         </div>
-                    </a>
-                    {{/each}}
-
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-            const navTabs = document.querySelectorAll("#nav-tabs > a");
-            navTabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                    navTabs.forEach((tab) => {
-                        tab.classList.remove("active");
-                    });
-                    tab.classList.add("active");
-                });
-            });
-
-            let cookies= document.cookie
-            let ulTag= document.getElementById("sidebar")
-
-            if(cookies.includes("pId")){
-                ulTag.innerHTML=`          <li class="active">
+    if (cookies.includes("pId")) {
+      ulTag.innerHTML = `          <li class="active">
             <div class="nav_icon">
               <i class="fa-solid fa-bed-pulse"></i>
               <a href="#">Patients</a>
             </div>
-            <ul class="sub_nav">
-              <li>
-                <div class="nav_icon">
+            <div class="nav_icon">
                   <i class="fa-solid fa-calendar-check"></i>
                   <a href="#">Book online</a>
                 </div>
 
-                <div class="nav_icon">
+              <div class="nav_icon">
                   <i class="fa-solid fa-calendar-check"></i>
                   <a href="#">Scheduled appointment</a>
                 </div>
+            <ul class="sub_nav">
+              <li>
+
               </li>
             </ul>
           </li>`
-            let title = document.getElementById("title");
-            console.log(title);
-            title.innerText = "Patient";
-            }else {
-                ulTag.innerHTML=` <li>
+      let title = document.getElementById("title");
+      console.log(title);
+      title.innerText = "Patient";
+    } else {
+      ulTag.innerHTML = ` <li>
             <div class="nav_icon">
               <i class="fa-solid fa-user-doctor"></i>
               <a href="#">Doctors</a>
             </div>
-            <ul class="sub_nav">
-              <li>
-                <div class="nav_icon">
+         <div class="nav_icon">
                   <i class="fa-brands fa-wpforms"></i>
-                  <a href="/doctor/patientlist">In charge form</a>
+                  <a href="/doctor/inchargeform">In charge form</a>
                 </div>
-                <div class="nav_icon">
+          <div class="nav_icon">
                   <i class="fa-solid fa-list"></i>
                   <a href="/doctor/getAllAppointments">Appointment list</a>
                 </div>
-              </li>
             </ul>
           </li>`
 
-            let title = document.getElementById("title");
-            console.log(title);
-            title.innerText = "Doctor";
-            }
-        </script>
+      let title = document.getElementById("title");
+      console.log(title);
+      title.innerText = "Doctor";
+    }
+  </script>
