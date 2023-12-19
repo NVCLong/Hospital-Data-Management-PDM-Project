@@ -2,9 +2,7 @@
   <div class="site-wrap">
     <nav class="site-nav">
       <div class="name">Patient list</div>
-
       <ul id="sidebar">
-
       </ul>
 
       <div class="note">
@@ -30,12 +28,11 @@
             </div>
             </div>
           {{/each}}
-
-
         </div>
       </div>
     </main>
   </div>
+
 
   <script>
     const navTabs = document.querySelectorAll("#nav-tabs > a");
@@ -48,11 +45,13 @@
       });
     });
 
+
     let cookies = document.cookie
     let ulTag = document.getElementById("sidebar")
 
     if (cookies.includes("pId")) {
-      ulTag.innerHTML = `          <li class="active">
+      ulTag.innerHTML = `
+      <li class="active">
             <div class="nav_icon">
               <i class="fa-solid fa-bed-pulse"></i>
               <a href="#">Patients</a>
@@ -68,7 +67,6 @@
                 </div>
             <ul class="sub_nav">
               <li>
-
               </li>
             </ul>
           </li>`
@@ -76,21 +74,22 @@
       console.log(title);
       title.innerText = "Patient";
     } else {
-      ulTag.innerHTML = ` <li>
+      ulTag.innerHTML = `
+        <li>
             <div class="nav_icon">
               <i class="fa-solid fa-user-doctor"></i>
               <a href="#">Doctors</a>
             </div>
          <div class="nav_icon">
-                  <i class="fa-brands fa-wpforms"></i>
-                  <a href="/doctor/inchargeform">In charge form</a>
+                <i class="fa-brands fa-wpforms"></i>
+                <a href="/doctor/inchargeform">In charge form</a>
                 </div>
           <div class="nav_icon">
-                  <i class="fa-solid fa-list"></i>
-                  <a href="/doctor/getAllAppointments">Appointment list</a>
+                <i class="fa-solid fa-list"></i>
+                <a href="/doctor/getAllAppointments">Appointment list</a>
                 </div>
             </ul>
-          </li>`
+        </li>`
 
       let title = document.getElementById("title");
       console.log(title);
