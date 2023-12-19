@@ -13,8 +13,10 @@
     "doctor_register": "sass --no-source-map --watch server/resource/scss/doctor_register.scss  server/public/css/doctor_register.css",
     "login": "sass --no-source-map --watch server/resource/scss/login.scss  server/public/css/login.css",
     "register": "sass --no-source-map --watch server/resource/scss/register.scss  server/public/css/register.css",
-    "all": "concurrently \"npm run homepage\" \"npm run dashboard\" \"npm run doctor_login\" \"npm run doctor_register\" \"npm run login\" \"npm run register\""
+    "all": "concurrently \"npm run homepage\" \"npm run dashboard\" \"npm run doctor_login\" \"npm run doctor_register\" \"npm run login\" \"npm run register\"",
+    "nodemon": "--watch src/ --exec 'node out/index.js' -e ts"
   },
+  
   "author": "",
   "license": "ISC",
   "devDependencies": {

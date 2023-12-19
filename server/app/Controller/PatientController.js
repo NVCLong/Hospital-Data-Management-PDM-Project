@@ -128,7 +128,7 @@ class PatientController {
                     [...updateValues, patientId],
                     (err, result) => {
                         if (err) throw err;
-                        res.redirect(`/patientDetails`);
+                        res.redirect(`/patient/patientDetails`);
                     }
                 );
             } catch (error) {

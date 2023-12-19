@@ -33,31 +33,31 @@
                 <h1 id="title"> Edit Personal Information
                 </h1>
             </header>
-            <div class="form-update-patient-info">
-                <form method="POST" action="">
+            <div class="form-edit-patient-info">
+                <form method="post" action="/patient/updateInfo/{{pId}}">
                     <div class="update-patient-info">
                         <div class="input-field">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" placeholder="Enter patient name" name="name" required />
+                            <input type="text" placeholder="Enter patient name" name="name" />
                         </div>
                         <div class="input-field">
                             <i class="fa-solid fa-envelope"></i>
-                            <input type="email" placeholder="Enter patient email" name="email" required />
+                            <input type="email" placeholder="Enter patient email" name="email" />
                         </div>
                         <div class="input-field">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="text" placeholder="Enter your phone number" name="phoneNumber" required />
+                            <input type="text" placeholder="Enter your phone number" name="phoneNumber" />
                         </div>
 
                         <div class="input-field">
                             <i class="fa-solid fa-map-location-dot"></i>
-                            <input type="text" placeholder="Enter your address" name="address" required />
+                            <input type="text" placeholder="Enter your address" name="address" />
                         </div>
                     </div>
 
                         <div class="editBtn">
                             <i class="fa-solid fa-pen"></i>
-                            <a href="/patient/updateInfo/{{patient.pId}}?_method=PATCH">Edit</a>
+                            <button type = "submit">Edit</button>
                 </div>
 
                 </form>
@@ -79,19 +79,24 @@
             });
         });
 
-        function submitPatch() {
-            const formData = new FormData(document.getElementById('status'));
-            fetch('/patient/updateInfo/{{patient.id}}', {
-                method: 'PATCH',
-                body: formData,
-            })
-                .then(() => {
-                    // Handle successful update
-                })
-                .catch(error => {
-                    // Handle errors
-                });
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Wait for the DOM to be ready
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the pId from the cookie
+        const pId = getCookie("pId");
+
+        // Check if pId is available
+        if (pId) {
+            // Update the form action with the pId
+            const form = document.querySelector(".form-edit-patient-info form");
+            form.action = `/patient/updateInfo/${pId}`;
         }
+    });
 
 
     </script>
