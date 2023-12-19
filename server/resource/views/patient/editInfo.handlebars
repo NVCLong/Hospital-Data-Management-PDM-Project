@@ -34,24 +34,24 @@
                 </h1>
             </header>
             <div class="form-edit-patient-info">
-                <form method="post" action="/patient/updateInfo/{{pId}}">
+                <form method="post" action="/patient/updateInfo/{{user.pId}}?_method=PUT">
                     <div class="update-patient-info">
                         <div class="input-field">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" placeholder="Enter patient name" name="name" />
+                            <input type="text"  name="name" value="{{user.name}}" />
                         </div>
                         <div class="input-field">
                             <i class="fa-solid fa-envelope"></i>
-                            <input type="email" placeholder="Enter patient email" name="email" />
+                            <input type="email"  name="email" value="{{user.email}}" />
                         </div>
                         <div class="input-field">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="text" placeholder="Enter your phone number" name="phoneNumber" />
+                            <input type="text"  name="phoneNumber" value="{{user.phoneNumber}}" />
                         </div>
 
                         <div class="input-field">
                             <i class="fa-solid fa-map-location-dot"></i>
-                            <input type="text" placeholder="Enter your address" name="address" />
+                            <input type="text"  name="address" value="{{user.address}}"/>
                         </div>
                     </div>
 
