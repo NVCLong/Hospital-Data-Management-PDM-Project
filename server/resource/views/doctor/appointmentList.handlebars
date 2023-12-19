@@ -1,4 +1,4 @@
-<body>
+
   <div class="site-wrap">
     <nav class="site-nav">
       <div class="name">Patient list</div>
@@ -22,14 +22,10 @@
           {{#each appointment}}
             <div class="item">
               {{this.name}} | {{this.meetDate}} | {{this.meetTime}}
-            <button type="submit" class="delBtn">
-                <i class="fa-solid fa-user-slash"></i>
-                   Delete</button>
             </div>
             </div>
           {{/each}}
         </div>
-      </div>
     </main>
   </div>
 

@@ -102,9 +102,10 @@ class PatientController {
                 `SELECT * FROM patients WHERE pId=${patientId}`,
                 (err, result) => {
                     if (err) throw err;
+                    console.log(result);
 
                     // const patient = SQLToObject(result);
-                    res.render("patient/editInfo", { user: result });
+                    res.render("patient/editInfo", { user: result[0] });
                 }
             );
         } catch (error) {
@@ -128,7 +129,7 @@ class PatientController {
                     [...updateValues, patientId],
                     (err, result) => {
                         if (err) throw err;
-                        res.redirect(`/patientDetails`);
+                        res.redirect(`/patient/patientDetails`);
                     }
                 );
             } catch (error) {
