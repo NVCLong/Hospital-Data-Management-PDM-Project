@@ -96,7 +96,7 @@ form p{
     height: 280px;
 }
 
-.registerBtn{
+.doctor-registerBtn{
     display: block;
     position: relative;
     margin-left: auto;
@@ -119,7 +119,7 @@ form p{
     font-size: 18px;
     transition: background 0.1s ease 0.1s;
 }
-.registerBtn:hover {
+.doctor-registerBtn:hover {
     background: linear-gradient(90deg, rgba(202,65,184,1) 0%, rgba(96,32,221,1) 100%);
     color: #fff;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);

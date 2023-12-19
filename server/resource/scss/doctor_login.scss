@@ -13,7 +13,7 @@
     position: relative;
 }
 
-.form-box{
+.doctor-form-box{
     width: 90%;
     max-width: 450px;
     position: absolute;
@@ -31,7 +31,7 @@
 
 }
 
-.form-box h1{
+.doctor-form-box h1{
     color:#e6f0ff;
     font-size: 30px;
     font-weight: 700;
@@ -42,7 +42,7 @@
 
 }
 
-.form-box h1::after{
+.doctor-form-box h1::after{
     content: '';
     width: 130px;
     height: 4px;
@@ -55,7 +55,7 @@
 }
 
 
-.input-field{
+.doctor-input-field{
     background: #eaeaea;
     margin: 15px 0;
     border-radius: 8px;
@@ -74,7 +74,7 @@ input{
     padding: 18px 15px;
 }
 
-.input-field i{
+.doctor-input-field i{
     margin-left: 15px;
     color: #999;
     background: transparent;
@@ -92,12 +92,12 @@ form p{
 }
 
 
-.btn-field{
+.doctor-btn-field{
     width: 100%;
     justify-items: center;
 }
 
-.input-group{
+.doctor-input-group{
     height: 280px;
 }
 
@@ -107,6 +107,7 @@ form p{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    margin-bottom: 90px;
     width: 50%;
     height: 20%;
     background: transparent;
