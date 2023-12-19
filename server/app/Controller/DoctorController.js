@@ -45,7 +45,7 @@ class DoctorController {
     async getAllAppointment(req, res) {
         try {
             const dId = req.cookies.d_ID;
-            await db.query(`SELECT name, meetDate, meetTime FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`, (err, result) => {
+            await db.query(`SELECT name, meetDate, meetTime, appointments.pId FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`, (err, result) => {
                 if(err) console.log(err)
                 console.log(result)
                 res.render("doctor/appointmentList", { appointment: result });
@@ -109,6 +109,21 @@ class DoctorController {
             })
         } catch (e) {
             console.log(e);
+        }
+    }
+
+    //[DELETE] /doctor/appointment/delete/:id
+    async deleteAppointment(req, res){
+        try{
+            await db.query(`DELETE FROM appointments WHERE pId=${req.params.id} AND dId=${req.cookies.d_ID}`, (err, result) =>{
+                if (err){
+                    console.log(err);
+                }
+                console.log(result)
+                res.redirect('/doctor/getAllAppointments')
+            })
+        }catch (e){
+            console.log(e)
         }
     }
     //[PUT] /doctor/updateForm/:id

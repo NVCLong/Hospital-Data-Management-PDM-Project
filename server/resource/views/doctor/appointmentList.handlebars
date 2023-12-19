@@ -20,22 +20,42 @@
       </header>
 
       <div class="appointmentList">
-        <div class="col">
+          <div class="col">
           {{#each appointment}}
             <div class="item">
               {{this.name}} | {{this.meetDate}} | {{this.meetTime}}
-            <button type="submit" class="delBtn">
-                <i class="fa-solid fa-user-slash"></i>
-                Delete</button>
             </div>
-            </div>
+              <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this.pId}}" data-target="#delete-course">Delete</a>
           {{/each}}
-
+          </div>
 
         </div>
-      </div>
     </main>
   </div>
+
+  <div class="modal fade" id="delete-course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Confirm delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  Do you want to delete  ?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button id="btn-delete-course" type="button" class="btn btn-danger">Delete</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <form method="post" id="deleteForm"></form>
+
+</body>
 
   <script>
     const navTabs = document.querySelectorAll("#nav-tabs > a");
@@ -93,7 +113,27 @@
           </li>`
 
       let title = document.getElementById("title");
-      console.log(title);
       title.innerText = "Doctor";
+
+
+
+        let deleteForm=document.getElementById('deleteForm')
+        let courseID;
+
+        //when dialog confirm click
+        document.addEventListener('DOMContentLoaded',function () {
+            $('#delete-course').on('show.bs.modal', function (event) {
+                let button = $(event.relatedTarget) // Button that triggered the modal
+                courseID = button.data('id') // Extract info from data-* attributes
+            })
+        })
+        const btndeletecourse=document.getElementById('btn-delete-course')
+        console.log(courseID)
+
+        // when delete course btn clicked
+        btndeletecourse.onclick=function () {
+            deleteForm.action = '/doctor/appointments/' + ${courseID} + '?_method=DELETE'
+            deleteForm.submit()
+        }
     }
   </script>
