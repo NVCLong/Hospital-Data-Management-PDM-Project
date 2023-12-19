@@ -1,21 +1,21 @@
 <body>
   <div class="site-wrap">
     <nav class="site-nav">
-      <div class="name">Patient information</div>
+      <div class="name">Patient Information</div>
 
       <ul id="sidebar">
         <li>
           <div class="nav_icon">
             <i class="fa-solid fa-user-doctor"></i>
-            <a href="#">Patient information</a>
+            <a href="#">Patient Information</a>
           </div>
           <div class="nav_icon">
             <i class="fa-brands fa-wpforms"></i>
-            <a href="/doctor/patientlist">In charge form</a>
+            <a href="/doctor/patientlist">In Charge Form</a>
           </div>
           <div class="nav_icon">
             <i class="fa-solid fa-list"></i>
-            <a href="/doctor/getAllAppointments">Appointment list</a>
+            <a href="/doctor/getAllAppointments">Appointment List</a>
           </div>
       </ul>
       </li>
@@ -30,22 +30,11 @@
 
     <main>
       <header>
-        <h1 id="title"> Patient information
+        <h1 id="title"> Patient Information
         </h1>
 
-        {{!-- <nav class="nav-tabs" id="nav-tabs">
-          <a href="#0" class="active">
-            Today
-            <span>14</span>
-          </a>
-          <a href="#0">
-            Pending
-            <span>24</span>
-          </a>
-        </nav> --}}
       </header>
       <div class="patient_information_field">
-
         <div class="col">
           <i class="fa-solid fa-circle-user"></i>
           Patient name
@@ -63,7 +52,8 @@
 
       <div class="patient_information">
 
-        <div class="col"> {{patient.pName}}
+        <div class="col">
+          {{patient.pName}}
         </div>
         <div class="col">
           {{patient.startDay}}
@@ -76,9 +66,9 @@
     </main>
 
 
-    <div class="editBtn">
+    <div class="editInchargeFormBtn">
       <i class="fa-solid fa-pen"></i>
-      <a href="/doctor/updateInchargeForm/{{patient.pId}}">Edit detail</a>
+      <a href="/doctor/updateInchargeForm/{{patient.pId}}">Edit Details</a>
     </div>
 
   </div>
