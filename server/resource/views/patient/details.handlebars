@@ -32,8 +32,7 @@
         <h1 id="title"> Patient Information
         </h1>
       </header>
-      <div class="patient_information_field">
-
+      <div class="patient_information_field_forPatient">
         <div class="col">
           <i class="fa-solid fa-circle-user"></i>
           Patient Name
@@ -50,10 +49,9 @@
           <i class="fa-solid fa-phone"></i>
           Phone Number
         </div>
-
       </div>
 
-      <div class="patient_information">
+      <div class="patient_information_forPatient">
         <div class="col">
           {{patients.name}}
         </div>
@@ -66,12 +64,10 @@
         <div class="col">
           {{patients.phoneNumber}}
         </div>
-
       </div>
     </main>
 
-
-    <div class="editDetailBtn">
+    <div class="editDetailBtn_Patient">
       <i class="fa-solid fa-pen"></i>
       <a href="/patient/patientEdit/{{patients.pId}}">Edit Details</a>
     </div>

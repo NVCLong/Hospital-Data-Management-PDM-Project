@@ -35,6 +35,7 @@
             </header>
             <div class="form-edit-patient-info">
                 <form method="post" action="/patient/updateInfo/{{user.pId}}?_method=PUT">
+
                     <div class="update-patient-info">
                         <div class="input-field">
                             <i class="fa-solid fa-user"></i>
@@ -55,9 +56,11 @@
                         </div>
                     </div>
 
-                        <div class="editBtn">
-                            <i class="fa-solid fa-pen"></i>
-                            <button type = "submit">Edit</button>
+                        <div >
+
+                            <button class="editBtn" type = "submit">
+                                <i class="fa-solid fa-pen"></i>
+                                Edit</button>
                 </div>
 
                 </form>
