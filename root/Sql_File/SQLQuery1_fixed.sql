@@ -108,3 +108,10 @@ INSERT INTO contain (deptId, pId) VALUES
   (2, 4),  -- Department 2 contains Patient 4
   (1, 5),  -- Department 1 contains Patient 5
   (3, 6);  -- Department 3 contains Patient 6
+
+INSERT INTO Work (dId, deptId) VALUES
+  (1, 1),  -- Doctor 1 works in Department 1 (General Medicine)
+  (2, 2),  -- Doctor 2 works in Department 2 (Pediatrics)
+  (3, 3),  -- Doctor 3 works in Department 3 (Dermatology)
+  (4, 2),  -- Doctor 4 works in Department 2 (Pediatrics)
+  (5, 3);  -- Doctor 5 works in Department 3 (Dermatology)
