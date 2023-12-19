@@ -5,20 +5,20 @@
 
       <ul id="sidebar">
         <li>
-            <div class="nav_icon">
-              <i class="fa-solid fa-user-doctor"></i>
-              <a href="#">Patient information</a>
-            </div>
-             <div class="nav_icon">
-                  <i class="fa-brands fa-wpforms"></i>
-                  <a href="/doctor/patientlist">In charge form</a>
-                </div>
-                <div class="nav_icon">
-                  <i class="fa-solid fa-list"></i>
-                  <a href="/doctor/getAllAppointments">Appointment list</a>
-                </div>
-            </ul>
-          </li>
+          <div class="nav_icon">
+            <i class="fa-solid fa-user-doctor"></i>
+            <a href="#">Patient information</a>
+          </div>
+          <div class="nav_icon">
+            <i class="fa-brands fa-wpforms"></i>
+            <a href="/doctor/patientlist">In charge form</a>
+          </div>
+          <div class="nav_icon">
+            <i class="fa-solid fa-list"></i>
+            <a href="/doctor/getAllAppointments">Appointment list</a>
+          </div>
+      </ul>
+      </li>
 
       </ul>
 
@@ -47,16 +47,16 @@
       <div class="patient_information_field">
 
         <div class="col">
-            <i class="fa-solid fa-circle-user"></i>
-            Patient name
+          <i class="fa-solid fa-circle-user"></i>
+          Patient name
         </div>
         <div class="col">
-            <i class="fa-solid fa-calendar-day"></i>
-            Start day
+          <i class="fa-solid fa-calendar-day"></i>
+          Start day
         </div>
         <div class="col">
-            <i class="fa-solid fa-circle-info"></i>
-            Patient status
+          <i class="fa-solid fa-circle-info"></i>
+          Patient status
         </div>
 
       </div>
@@ -66,10 +66,10 @@
         <div class="col"> {{patient.pName}}
         </div>
         <div class="col">
-            {{patient.startDay}}
+          {{patient.startDay}}
         </div>
         <div class="col">
-            {{patient.details}}
+          {{patient.details}}
         </div>
 
       </div>
@@ -77,22 +77,22 @@
 
 
     <div class="editBtn">
-          <i class="fa-solid fa-pen"></i>
-          <a href="/doctor/updateInchargeForm/{{patient.pId}}">Edit detail</a>
+      <i class="fa-solid fa-pen"></i>
+      <a href="/doctor/updateInchargeForm/{{patient.pId}}">Edit detail</a>
     </div>
 
   </div>
 
   <script>
-            const navTabs = document.querySelectorAll("#nav-tabs > a");
-            navTabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                    navTabs.forEach((tab) => {
-                        tab.classList.remove("active");
-                    });
-                    tab.classList.add("active");
-                });
-            });
+    const navTabs = document.querySelectorAll("#nav-tabs > a");
+    navTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        navTabs.forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        tab.classList.add("active");
+      });
+    });
 
 
-        </script>
+  </script>

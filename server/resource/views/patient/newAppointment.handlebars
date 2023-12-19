@@ -30,11 +30,11 @@
                 </h1>
             </header>
             <div class="form-update-patient-info">
-                <form method="post" action="">
+                <form method="post" action="/patient/newAppointment/{{pId}}">
                     <div class="update-patient-info">
                         <div class="input-field">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" placeholder="Enter meet day" name="meetDate" required />
+                            <input type="text" placeholder="Enter meet date" name="meetDate" required />
                         </div>
                         <div class="input-field">
                             <i class="fa-solid fa-envelope"></i>
@@ -46,10 +46,10 @@
                         </div>
                     </div>
 
-         <div class="editBtn">
-          <i class="fa-solid fa-pen"></i>
-          <a href="/patient/newAppointment/{{patient.pId}}">Submit appointment</a>
-            </div>
+                    <div class="editBtn">
+                        <i class="fa-solid fa-pen"></i>
+                        <button type = "submit" >Schedule</button>
+                    </div>
 
                 </form>
             </div>
@@ -70,5 +70,19 @@
             });
         });
 
+        function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
+    document.addEventListener("DOMContentLoaded", function () {
+        const pId = getCookie("pId");
+
+        // Check if pId is available
+        if (pId) {
+            const form = document.querySelector(".form-update-patient-info form");
+            form.action = `/patient/newAppointment/${pId}`;
+        }
+    });
     </script>

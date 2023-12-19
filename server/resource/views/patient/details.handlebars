@@ -5,20 +5,20 @@
 
       <ul id="sidebar">
         <li>
-            <div class="nav_icon">
-              <i class="fa-solid fa-user"></i>
-              <a href="">Patient information</a>
-            </div>
-             {{!-- <div class="nav_icon">
-                  <i class="fa-brands fa-wpforms"></i>
-                  <a href="/patient/patientlist">Patient detail</a>
-                </div> --}}
-                <div class="nav_icon">
-                  <i class="fa-solid fa-list"></i>
-                  <a href="/patient/newAppointment">New appointment</a>
-                </div>
-            </ul>
-          </li>
+          <div class="nav_icon">
+            <i class="fa-solid fa-user"></i>
+            <a href="">Patient information</a>
+          </div>
+          {{!-- <div class="nav_icon">
+            <i class="fa-brands fa-wpforms"></i>
+            <a href="/patient/patientlist">Patient detail</a>
+          </div> --}}
+          <div class="nav_icon">
+            <i class="fa-solid fa-list"></i>
+            <a href="/patient/newAppointment">New appointment</a>
+          </div>
+      </ul>
+      </li>
 
       </ul>
 
@@ -36,20 +36,20 @@
       <div class="patient_information_field">
 
         <div class="col">
-            <i class="fa-solid fa-circle-user"></i>
-            Patient name
+          <i class="fa-solid fa-circle-user"></i>
+          Patient name
         </div>
         <div class="col">
-            <i class="fa-solid fa-envelope"></i>
-            Email
+          <i class="fa-solid fa-envelope"></i>
+          Email
         </div>
         <div class="col">
-            <i class="fa-solid fa-map-location"></i>
-            Address
+          <i class="fa-solid fa-map-location"></i>
+          Address
         </div>
         <div class="col">
-            <i class="fa-solid fa-phone"></i>
-            Phone number
+          <i class="fa-solid fa-phone"></i>
+          Phone number
         </div>
 
       </div>
@@ -59,13 +59,13 @@
           {{patients.name}}
         </div>
         <div class="col">
-            {{patients.email}}
+          {{patients.email}}
         </div>
         <div class="col">
-            {{patients.address}}
+          {{patients.address}}
         </div>
         <div class="col">
-            {{patients.phoneNumber}}
+          {{patients.phoneNumber}}
         </div>
 
       </div>
@@ -73,22 +73,22 @@
 
 
     <div class="editBtn">
-          <i class="fa-solid fa-pen"></i>
-          <a href="/patient/patientEdit/{{patient.pId}}">Edit detail</a>
+      <i class="fa-solid fa-pen"></i>
+      <a href="/patient/patientEdit/{{patient.pId}}">Edit detail</a>
     </div>
 
   </div>
 
   <script>
-            const navTabs = document.querySelectorAll("#nav-tabs > a");
-            navTabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                    navTabs.forEach((tab) => {
-                        tab.classList.remove("active");
-                    });
-                    tab.classList.add("active");
-                });
-            });
+    const navTabs = document.querySelectorAll("#nav-tabs > a");
+    navTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        navTabs.forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        tab.classList.add("active");
+      });
+    });
 
 
-        </script>
+  </script>
