@@ -45,7 +45,9 @@ class DoctorController {
     async getAllAppointment(req, res) {
         try {
             const dId = req.cookies.d_ID;
-            await db.query(`SELECT name, date, time FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`, (err, result) => {
+            await db.query(`SELECT name, meetDate, meetTime FROM appointments JOIN patients ON patients.pId=appointments.pId WHERE dId=${dId}`, (err, result) => {
+                if(err) console.log(err)
+                console.log(result)
                 res.render("doctor/appointmentList", { appointment: result });
             });
         } catch (error) {

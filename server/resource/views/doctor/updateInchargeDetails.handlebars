@@ -17,63 +17,56 @@
                         <i class="fa-solid fa-list"></i>
                         <a href="/doctor/getAllAppointments">Appointment list</a>
                     </div>
-                </ul>
+            </ul>
             </li>
 
-        </ul>
+            </ul>
 
-        <div class="note">
-            <h3>PDM Project</h3>
-            <p>Hospital Data Management</p>
-        </div>
-    </nav>
+            <div class="note">
+                <h3>PDM Project</h3>
+                <p>Hospital Data Management</p>
+            </div>
+        </nav>
 
-    <main>
-        <header>
-            <h1 id="title"> Update patient status
-            </h1>
-        </header>
+        <main>
+            <header>
+                <h1 id="title"> Update patient status
+                </h1>
+            </header>
 
-        <form id="status" method="POST" action="/doctor/updateInchargeForm/{{patient.pId}}?_method=PATCH">
-
-                <input value="{{patient.details}}" type="text" tabindex="1" name="details"
-                    required autofocus>
-
-                <button name="submit" type="submit" id="contact-submit"
-                    data-submit="...Sending"> Submit </button>
-        </form>
-
-
-
-        </div>
+            <form id="status" method="POST" action="/doctor/updateInchargeForm/{{patient.pId}}?_method=PATCH">
+                <input value="{{patient.details}}" type="text" tabindex="1" name="details" required autofocus>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending"> Submit </button>
+            </form>
+    </div>
     </main>
 
-</div>
+    </div>
 
-<script>
-            const navTabs = document.querySelectorAll("#nav-tabs > a");
-            navTabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                    navTabs.forEach((tab) => {
-                        tab.classList.remove("active");
-                    });
-                    tab.classList.add("active");
+    <script>
+        const navTabs = document.querySelectorAll("#nav-tabs > a");
+        navTabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                navTabs.forEach((tab) => {
+                    tab.classList.remove("active");
                 });
+                tab.classList.add("active");
             });
+        });
 
-            function submitPatch() {
-  const formData = new FormData(document.getElementById('status'));
-  fetch('/doctor/updateInchargeForm/{{patient.id}}', {
-    method: 'PATCH',
-    body: formData,
-  })
-  .then(() => {
-    // Handle successful update
-  })
-  .catch(error => {
-    // Handle errors
-  });
-}
+        function submitPatch() {
+            const formData = new FormData(document.getElementById('status'));
+            fetch('/doctor/updateInchargeForm/{{patient.id}}', {
+                method: 'PATCH',
+                body: formData,
+            })
+                .then(() => {
+                    // Handle successful update
+                })
+                .catch(error => {
+                    // Handle errors
+                });
+        }
 
 
-        </script>
+    </script>
