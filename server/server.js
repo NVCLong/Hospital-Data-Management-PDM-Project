@@ -7,7 +7,8 @@ const morgan = require("morgan");
 const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const expressHandlebars = require("express-handlebars");
-const { join } = require("path");
+const { join } = require("path")
+const methodOverride= require("method-override")
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -18,6 +19,10 @@ app.use(express.static(join(__dirname, "public")));
 app.use(cookieParser());
 //morgan
 app.use(morgan("combined"));
+
+
+
+app.use(methodOverride('_method'))
 //routers
 routes(app);
 

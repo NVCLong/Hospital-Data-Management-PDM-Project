@@ -61,6 +61,7 @@ CREATE TABLE Work (
 	FOREIGN KEY (deptId) REFERENCES Departments (deptId)
 );
 
+
 INSERT INTO Departments VALUES
   (1, 'General Medicine', 1, 1),
   (2, 'Pediatrics', 2, 2),

@@ -9,6 +9,6 @@ route.get("/inchargeForm", doctorControler.inChargeForm);
 route.post("/inchargeForm",doctorControler.inChargeFormPost);
 route.get("/updateInchargeForm/:id",doctorControler.updateForm)
 route.get("/patientlist/:id", doctorControler.patientInformation);
-route.put("/updateInchargeForm/:id",doctorControler.updateDetail)
+route.patch("/updateInchargeForm/:id",doctorControler.updateDetail)
 
 module.exports = route;

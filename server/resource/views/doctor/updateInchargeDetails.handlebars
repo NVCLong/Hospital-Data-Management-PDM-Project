@@ -34,19 +34,7 @@
             </h1>
         </header>
 
-        <form id="status" method="POST" action="/doctor/updateInchargeForm/{{patient.pId}}?_method=PUT">
-
-                <input value="{{patient.startDay}}" type="text" tabindex="1" name="startDay"
-                    required autofocus>
-
-                <input value="{{patient.pId}}" type="text" tabindex="1" name="pId"
-                    required autofocus>
-
-                <input value="{{patient.dId}}" type="text" tabindex="1" name="dId"
-                    required autofocus>
-
-                <input value="{{patient.pName}}" type="text" tabindex="1" name="pName"
-                    required autofocus>
+        <form id="status" method="POST" action="/doctor/updateInchargeForm/{{patient.pId}}?_method=PATCH">
 
                 <input value="{{patient.details}}" type="text" tabindex="1" name="details"
                     required autofocus>

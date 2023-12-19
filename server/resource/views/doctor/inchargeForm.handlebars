@@ -7,11 +7,11 @@
                 <li>
                     <div class="nav_icon">
                         <i class="fa-solid fa-user-doctor"></i>
-                        <a href="#">Patient information</a>
+                        <a href="/dashboard">Dashboard</a>
                     </div>
                     <div class="nav_icon">
                         <i class="fa-brands fa-wpforms"></i>
-                        <a href="/doctor/patientlist">In charge form</a>
+                        <a href="/doctor/patientlist">Patient List</a>
                     </div>
                     <div class="nav_icon">
                         <i class="fa-solid fa-list"></i>
@@ -36,31 +36,30 @@
         </header>
         <form id="status" method="post" action="/doctor/inchargeForm">
             <fieldset>
-                <input placeholder="Input patient ID" type="text" tabindex="1" required autofocus>
+                <input placeholder="Input patient ID" name="pId" type="text" tabindex="1" required autofocus>
             </fieldset>
             <fieldset>
-                <input placeholder="Input doctor ID" type="text" tabindex="1" required autofocus>
+                <input placeholder="Input doctor ID" name="dId" type="text" tabindex="1" required autofocus>
             </fieldset>
             <fieldset>
-                <input placeholder="Input patient name" type="text" tabindex="1" required autofocus>
+                <input placeholder="Input patient name" name="pName" type="text" tabindex="1" required autofocus>
             </fieldset>
             <fieldset>
-                <input placeholder="Input patient status" type="text" tabindex="1" required autofocus>
+                <input placeholder="Input patient status" name="details" type="text" tabindex="1" required autofocus>
             </fieldset>
             <fieldset>
-                <input placeholder="Input patient start date" type="text" tabindex="1" required autofocus>
+                <input placeholder="Input patient start date" name="startDay" type="date" tabindex="1" required autofocus>
             </fieldset>
             <fieldset>
                 <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
             </fieldset>
         </form>
 
-
-
-        </div>
     </main>
+    </div>
 
-</div>
+</body>
+
 
 <script>
             const navTabs = document.querySelectorAll("#nav-tabs > a");

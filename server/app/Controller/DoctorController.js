@@ -112,15 +112,10 @@ class DoctorController {
     //[PUT] /doctor/updateForm/:id
     async updateDetail(req,res){
         try{
-
-              let  startDay= req.body.startDay
-               let pId= req.params.pId
-            let dId=  req.params.dId
-               let  pName= req.body.pName
+               let dId=  req.cookies.d_ID
                let  details= req.body.details
 
-
-            await db.query(`Update inchargeof SET inchargeof.details="${details}", inchargeof.startDay="${{startDay}}, inchargeof.pId=${{pId}}, inchargeof.dId="${{dId}}, inchargeof.pName="${{pName}}" inch WHERE inchargeof.pId=${req.params.id} AND inchargeof.dId=${dId}`,(err, result)=>{
+            await db.query(`Update inchargeof SET inchargeof.details="${details}" WHERE inchargeof.pId=${req.params.id} AND inchargeof.dId=${dId}`,(err, result)=>{
                 if (err){
                     console.log(err)
                     throw err
