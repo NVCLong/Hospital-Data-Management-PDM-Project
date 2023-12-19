@@ -28,42 +28,46 @@
   </div>
 
   <script>
-            const navTabs = document.querySelectorAll("#nav-tabs > a");
-            navTabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                    navTabs.forEach((tab) => {
-                        tab.classList.remove("active");
-                    });
-                    tab.classList.add("active");
-                });
-            });
-            let cookies= document.cookie
-            let ulTag= document.getElementById("sidebar")
+    const navTabs = document.querySelectorAll("#nav-tabs > a");
+    navTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        navTabs.forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        tab.classList.add("active");
+      });
+    });
+    let cookies = document.cookie
+    let ulTag = document.getElementById("sidebar")
 
-            if(cookies.includes("pId")){
-                ulTag.innerHTML=`
+    if (cookies.includes("pId")) {
+      ulTag.innerHTML =
+      `
             <li class="active">
             <div class="nav_icon">
               <i class="fa-solid fa-bed-pulse"></i>
               <a href="/patient/patientDetails">Patient information</a>
             </div>
             <li>
-                {{!-- <div class="nav_icon">
-                  <i class="fa-solid fa-calendar-check"></i>
-                  <a href="#">Book online</a>
-                </div> --}}
+                  <div class="nav_icon">
+                    <i class="fa-solid fa-calendar-days"></i>
 
-                <div class="nav_icon">
-                  <i class="fa-solid fa-calendar-check"></i>
-                  <a href="#">Scheduled appointment</a>
+                  <a href="/patient/newAppointment">New appointment</a>
                 </div>
-              </li>
-          </li>`
-            let title = document.getElementById("title");
-            console.log(title);
-            title.innerText = "Patient";
-            }else {
-                ulTag.innerHTML=`
+            </li>
+              <li>
+                  <div class="nav_icon">
+                                    <i class="fa-solid fa-calendar-check"></i>
+                  <a href="/patient/appointments">Scheduled appointment</a>
+                </div>
+            </li>
+          </li>
+          `
+      let title = document.getElementById("title");
+      console.log(title);
+      title.innerText = "Patient";
+    } else {
+      ulTag.innerHTML = `
             <li>
             <div class="nav_icon">
               <i class="fa-solid fa-user-doctor"></i>
@@ -79,8 +83,8 @@
                 </div>
           </li>`
 
-            let title = document.getElementById("title");
-            console.log(title);
-            title.innerText = "Doctor";
-            }
-        </script>
+      let title = document.getElementById("title");
+      console.log(title);
+      title.innerText = "Doctor";
+    }
+  </script>

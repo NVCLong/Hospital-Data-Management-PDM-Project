@@ -6,12 +6,16 @@
             <ul id="sidebar">
                 <li>
                     <div class="nav_icon">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <a href="#">Patient information</a>
+                        <i class="fa-solid fa-user"></i>
+                        <a href="/patient/patientDetails">Patient Information</a>
                     </div>
                     <div class="nav_icon">
                         <i class="fa-solid fa-list"></i>
-                        <a href="/patient/newAppointment">Appointment list</a>
+                        <a href="/patient/newAppointment">New Appointment</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <a href="/patient/appointments">Scheduled Appointment</a>
                     </div>
             </ul>
             </li>
@@ -52,9 +56,9 @@
                     </div>
 
                         <div class="editBtn">
-          <i class="fa-solid fa-pen"></i>
-          <a href="/patient/updateInfo/{{patient.pId}}?_method=PATCH">Edit</a>
-    </div>
+                            <i class="fa-solid fa-pen"></i>
+                            <a href="/patient/updateInfo/{{patient.pId}}?_method=PATCH">Edit</a>
+                </div>
 
                 </form>
             </div>

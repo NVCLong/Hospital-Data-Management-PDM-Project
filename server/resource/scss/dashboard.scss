@@ -690,3 +690,86 @@ fieldset {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   transition: background 0.1s ease 0.1s;
 }
+
+
+.scheduled-appointment-field {
+  padding: 3rem;
+  display: inline-grid;
+  background: #ffffff;
+
+  i {
+    padding-right: 15px;
+  }
+
+  .col {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 200px;
+    padding: 2rem;
+    background: #ebecee;
+    box-shadow: 0 0 5px rgba(black, 0.04);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    height: 70px;
+    line-height: 70px;
+    margin-top: 10px;
+    margin-bottom: 45px;
+
+
+    &:nth-child(1) {
+      border-top: 4px solid #50aaee;
+
+    }
+
+    &:nth-child(2) {
+      border-top: 4px solid #d56ec7;
+    }
+
+    &:nth-child(3) {
+      border-top: 4px solid #e37e55;
+    }
+  }
+}
+
+
+.scheduled-appointment {
+  padding: 3rem;
+  display: inline-grid;
+  background: #ffffff;
+
+  .col {
+    margin: auto;
+    min-height: 100px;
+    width: 600px;
+    padding: 1rem;
+    background: #ebecee;
+    box-shadow: 0 0 5px rgba(black, 0.04);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    height: 70px;
+    line-height: 70px;
+    margin-bottom: 25px;
+
+
+
+    &:nth-child(1) {
+      border-top: 4px solid #50aaee;
+
+    }
+
+    &:nth-child(2) {
+      border-top: 4px solid #d56ec7;
+    }
+
+    &:nth-child(3) {
+      border-top: 4px solid #e37e55;
+    }
+
+    &:nth-child(4) {
+      border-top: 4px solid #ebbd41;
+    }
+  }
+}

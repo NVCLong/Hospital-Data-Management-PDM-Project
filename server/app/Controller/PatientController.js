@@ -22,7 +22,7 @@ class PatientController {
                     }
                     console.log(result);
                     res.render("patient/appointments", {
-                        appointments: result,
+                        appointments: result[0],
                     });
                 }
             );

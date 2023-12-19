@@ -1,25 +1,24 @@
 <body>
   <div class="site-wrap">
     <nav class="site-nav">
-      <div class="name">Patient information</div>
+      <div class="name">Patient Information</div>
 
       <ul id="sidebar">
         <li>
           <div class="nav_icon">
-            <i class="fa-solid fa-user"></i>
-            <a href="">Patient information</a>
-          </div>
-          {{!-- <div class="nav_icon">
-            <i class="fa-brands fa-wpforms"></i>
-            <a href="/patient/patientlist">Patient detail</a>
-          </div> --}}
-          <div class="nav_icon">
-            <i class="fa-solid fa-list"></i>
-            <a href="/patient/newAppointment">New appointment</a>
-          </div>
+                        <i class="fa-solid fa-user"></i>
+                        <a href="/patient/patientDetails">Patient Information</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-list"></i>
+                        <a href="/patient/newAppointment">New Appointment</a>
+                    </div>
+                    <div class="nav_icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <a href="/patient/appointments">Scheduled Appointment</a>
+                    </div>
       </ul>
       </li>
-
       </ul>
 
       <div class="note">
@@ -30,14 +29,14 @@
 
     <main>
       <header>
-        <h1 id="title"> Patient information
+        <h1 id="title"> Patient Information
         </h1>
       </header>
       <div class="patient_information_field">
 
         <div class="col">
           <i class="fa-solid fa-circle-user"></i>
-          Patient name
+          Patient Name
         </div>
         <div class="col">
           <i class="fa-solid fa-envelope"></i>
@@ -49,7 +48,7 @@
         </div>
         <div class="col">
           <i class="fa-solid fa-phone"></i>
-          Phone number
+          Phone Number
         </div>
 
       </div>
@@ -74,7 +73,7 @@
 
     <div class="editBtn">
       <i class="fa-solid fa-pen"></i>
-      <a href="/patient/patientEdit/{{patient.pId}}">Edit detail</a>
+      <a href="/patient/patientEdit/{{patient.pId}}">Edit Details</a>
     </div>
 
   </div>
