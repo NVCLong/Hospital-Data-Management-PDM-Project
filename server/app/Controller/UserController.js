@@ -92,7 +92,7 @@ class UserController {
                     }
                     const validPassword = await bcrypt.compare(password, doctor.password);
                     if (!validPassword) {
-                        res.status(200).json("Different password");
+                        res.status(200).redirect('/authentication/doctor/login');
                     } else if (validPassword && doctor) {
                         let accessToken=jwt.sign(
                             {
@@ -148,7 +148,7 @@ class UserController {
                     }
                     const validPassword = await bcrypt.compare(password, patient.password);
                     if (!validPassword) {
-                        res.status(200).json("Different password");
+                        res.status(200).redirect("/authentication/");
                     } else if (validPassword && patient) {
                         let accessToken=jwt.sign(
                             {
