@@ -13,7 +13,7 @@
     position: relative;
 }
 
-.form-box{
+.patient-form-box{
     width: 90%;
     max-width: 450px;
     position: absolute;
@@ -31,7 +31,7 @@
 
 }
 
-.form-box h1{
+.patient-form-box h1{
     color:#e6f0ff;
     font-size: 30px;
     font-weight: 700;
@@ -42,7 +42,7 @@
 
 }
 
-.form-box h1::after{
+.patient-form-box h1::after{
     content: '';
     width: 130px;
     height: 4px;
@@ -55,7 +55,7 @@
 }
 
 
-.input-field{
+.patient-input-field{
     background: #eaeaea;
     margin: 15px 0;
     border-radius: 8px;
@@ -74,7 +74,7 @@ input{
     padding: 18px 15px;
 }
 
-.input-field i{
+.patient-input-field i{
     margin-left: 15px;
     color: #999;
     background: transparent;
@@ -92,16 +92,16 @@ form p{
 }
 
 
-.input-group{
+.patient-input-group{
     height: 280px;
 }
 
-.doctor-registerBtn{
+.patient-registerBtn{
     display: block;
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 110px;
+    margin-top: 140px;
     width: 50%;
     height: 20%;
     background: transparent;
@@ -115,11 +115,9 @@ form p{
     font-weight: 700;
     letter-spacing: 2px;
     cursor: pointer;
-    padding: 20px 20px 20px 20px;
-    font-size: 18px;
     transition: background 0.1s ease 0.1s;
 }
-.doctor-registerBtn:hover {
+.patient-registerBtn:hover {
     background: linear-gradient(90deg, rgba(202,65,184,1) 0%, rgba(96,32,221,1) 100%);
     color: #fff;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
