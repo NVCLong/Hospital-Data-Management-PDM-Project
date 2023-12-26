@@ -115,11 +115,12 @@ class DoctorController {
     //[DELETE] /doctor/appointment/delete/:id
     async deleteAppointment(req, res){
         try{
+            console.log(req.params.id);
+            console.log(req.cookies.d_ID)
             await db.query(`DELETE FROM appointments WHERE pId=${req.params.id} AND dId=${req.cookies.d_ID}`, (err, result) =>{
                 if (err){
                     console.log(err);
                 }
-                console.log(result)
                 res.redirect('/doctor/getAllAppointments')
             })
         }catch (e){
