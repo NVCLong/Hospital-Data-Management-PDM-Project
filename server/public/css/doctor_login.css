@@ -98,7 +98,7 @@ form p {
   height: 280px;
 }
 
-.loginBtn {
+.doctor-loginBtn {
   display: block;
   position: relative;
   margin-left: auto;
@@ -112,14 +112,13 @@ form p {
   border: 0;
   outline: 0;
   padding: 30px 30px;
-  border-radius: 8px;
   color: #ffffff;
   border: 2px solid rgba(255, 255, 255, 0.2);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 2px;
   cursor: pointer;
-  border-radius: 40px;
+  border-radius: 50px;
   padding: 20px 45px 20px 20px;
   font-size: 18px;
   font-weight: 700;
@@ -128,7 +127,7 @@ form p {
   transition: background 0.1s ease 0.1s;
 }
 
-.loginBtn:hover {
+.doctor-loginBtn:hover {
   background: linear-gradient(90deg, rgb(202, 65, 184) 0%, rgb(96, 32, 221) 100%);
   color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);

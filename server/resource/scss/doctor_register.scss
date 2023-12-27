@@ -17,6 +17,7 @@
     width: 90%;
     max-width: 450px;
     position: absolute;
+    height: 90%;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -28,7 +29,6 @@
     text-align: center;
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 8px;
-
 }
 
 .form-box h1{
@@ -83,7 +83,7 @@ form p{
     height: 280px;
 }
 
-.registerBtn{
+.doctor-registerBtn{
     display: block;
     position: relative;
     margin-left: auto;
